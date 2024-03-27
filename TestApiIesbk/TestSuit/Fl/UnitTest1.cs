@@ -19,7 +19,7 @@ namespace TestApiIesbk.TestSuit.Fl
         [Test]
         public void OpenApplication()
         {
-            Assert.Fail("Работает");
+            Assert.Fail("Проверка связи");
         }
 
 
