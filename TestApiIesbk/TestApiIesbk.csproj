@@ -10,6 +10,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="TestSuite\Common\testdata.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="TestSuite\Common\testdata.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
     <PackageReference Include="NUnit" Version="4.1.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
@@ -27,9 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="PageObject\" />
-    <Folder Include="TestSuit\Common\" />
-    <Folder Include="TestSuit\Ul\" />
+    <Folder Include="TestSuite\Fl\LoginTech\" />
   </ItemGroup>
 
 </Project>
