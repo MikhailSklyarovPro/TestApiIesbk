@@ -1,18 +1,27 @@
-﻿using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TestApiIesbk.PageObject;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 
-namespace TestApiIesbk.TestSuite.Fl
+namespace TestApiIesbk.Controller
 {
-    public class GetDataUserTest
+    public class FLController
     {
-        [Test]
+
+        //Вход пользователя за техподдержку с логином и паролем
+        public void LoginTech()
+        {
+
+        }
+
+
+
+        //Вход пользователя с логином и паролем 
+        public void Login() 
+        {
+
+        }
+
+
+
+        //Получение данных о пользователе
         public void GetUserInfo()
         {
             string URL = GlobalMethod.config["ApiUrl"]!; //Путь до апи
@@ -34,6 +43,14 @@ namespace TestApiIesbk.TestSuite.Fl
                 Assert.Fail("ошибка");
             }
             client.Dispose();
+        }
+
+
+
+        //Получение данных о приборах учета
+        public void GetDeviceInfo()
+        {
+
         }
     }
 }

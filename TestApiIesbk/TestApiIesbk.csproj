@@ -10,11 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="TestSuite\Common\testdata.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="TestSuite\Common\testdata.json" />
+    <Compile Include="testdataCommon.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,6 +32,11 @@
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="122.0.6261.6901" />
   </ItemGroup>
 
-  <ProjectExtensions><VisualStudio><UserProperties testsuite_4common_4testdata_1json__JsonSchema="https://json.schemastore.org/appsettings.json" /></VisualStudio></ProjectExtensions>
+  <ItemGroup>
+    <Folder Include="TestSuite\Common\" />
+    <Folder Include="TestSuite\UL\" />
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties testdatacommon_1json__JsonSchema="https://json.schemastore.org/appsettings.json" /></VisualStudio></ProjectExtensions>
 
 </Project>

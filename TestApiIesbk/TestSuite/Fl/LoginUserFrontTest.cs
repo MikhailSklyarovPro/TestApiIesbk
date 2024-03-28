@@ -1,10 +1,13 @@
 ﻿using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
 using TestApiIesbk.PageObject;
+using TestApiIesbk.Model;
+using System.Text.Json;
+using TestApiIesbk.Controller;
 
 namespace TestApiIesbk.TestSuite.Fl
 {
-    public class LoginTechnicalSupportTest
+    public class LoginUserFrontTest
     {
         private IWebDriver _webDriver;
 
@@ -17,13 +20,15 @@ namespace TestApiIesbk.TestSuite.Fl
         }
 
         [Test]
-        public void LoginFlTech()
+        public void LoginFl()
         {
             MainPageFLPageObject mainPageFLPage = new MainPageFLPageObject(_webDriver);
-            mainPageFLPage.ClickButtonPersonalAccountTech();
-            mainPageFLPage.EnterLoginTech("Misha");
-            mainPageFLPage.EnterPasswordTech("111111111");
-            mainPageFLPage.ClickButtonLoginTech();
+            mainPageFLPage.ClickButtonPersonalAccount();
+            mainPageFLPage.ChoiceRadioButtonFL();
+            mainPageFLPage.ChoiceRadioButtonMethodLogin();
+            mainPageFLPage.EnterNumberAccount("10103005224");
+            mainPageFLPage.EnterPassword("111111111");
+            mainPageFLPage.ClickButtonLogin();
         }
 
 

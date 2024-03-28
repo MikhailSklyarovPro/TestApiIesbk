@@ -7,7 +7,7 @@ class GlobalMethod
     //Добавляем файлы настроек в переменную для доступа из всего приложения (путь до родительского каталога по умолчанию переопределили на свой)
     public static IConfigurationRoot config = new ConfigurationBuilder()
         .SetBasePath("C:\\Users\\SklyarovMD\\source\\repos\\TestApiIesbk\\TestApiIesbk")
-        .AddJsonFile("appsettings.json")
+        .AddJsonFile("testdataCommon.json")
         .Build();
 
     ////Добавляем тестовые данные для ФЛ в переменную для доступа из всего приложения (путь до родительского каталога по умолчанию переопределили на свой)
