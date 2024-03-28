@@ -1,11 +1,8 @@
 ﻿using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TestApiIesbk.PageObject;
+using TestApiIesbk.Model;
+using System.Text.Json;
 
 namespace TestApiIesbk.TestSuite.Fl
 {
@@ -22,17 +19,22 @@ namespace TestApiIesbk.TestSuite.Fl
         }
 
         [Test]
-        public void ClickButtonPersonalAccount()
+        public void LoginFl()
         {
             MainPageFLPageObject mainPageFLPage = new MainPageFLPageObject(_webDriver);
             mainPageFLPage.ClickButtonPersonalAccount();
+            mainPageFLPage.ChoiceRadioButtonFL();
+            mainPageFLPage.ChoiceRadioButtonMethodLogin();
+            mainPageFLPage.EnterNumberAccount("10103005224");
+            mainPageFLPage.EnterPassword("111111111");
+            mainPageFLPage.ClickButtonLogin();
         }
 
 
         [TearDown]
         public void TearDown()
         {
-            _webDriver.Close();
+           _webDriver.Close();
         }
     }
 }
