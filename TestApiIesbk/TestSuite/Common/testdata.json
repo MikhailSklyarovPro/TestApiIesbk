@@ -1,12 +1,1 @@
-﻿[
-  {
-    "url": "https://api.enplus.ru/v2/webapifl/sbyt/api",
-    "type": "common",
-    "tech_login": "testuser",
-    "tech_password": "111111111",
-    "testsettings": {
-      "email": "test@test.com",
-      "phone": "796400000000"
-    }
-  },
-]
+﻿

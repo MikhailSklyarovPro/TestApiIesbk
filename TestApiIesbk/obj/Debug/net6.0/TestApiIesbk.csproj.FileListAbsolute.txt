@@ -206,3 +206,14 @@ C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\obj\Debug\net6.0\refi
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\obj\Debug\net6.0\TestApiIesbk.pdb
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\obj\Debug\net6.0\TestApiIesbk.genruntimeconfig.cache
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\obj\Debug\net6.0\ref\TestApiIesbk.dll
+C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.Extensions.Configuration.dll
+C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.Extensions.Configuration.FileExtensions.dll
+C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Json.dll
+C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.Extensions.FileProviders.Physical.dll
+C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.Extensions.FileSystemGlobbing.dll
+C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\System.Text.Encodings.Web.dll
+C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\System.Text.Json.dll
+C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll

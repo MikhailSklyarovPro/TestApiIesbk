@@ -1,12 +1,16 @@
-using OpenQA.Selenium.Chrome;
+﻿using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using TestApiIesbk.PageObject;
 
-namespace TestApiIesbk.TestSuit.Fl.LoginUser
+namespace TestApiIesbk.TestSuite.Fl
 {
-    public class Tests
+    public class LoginUserTest
     {
-
         private IWebDriver _webDriver;
 
         [SetUp]
@@ -18,10 +22,10 @@ namespace TestApiIesbk.TestSuit.Fl.LoginUser
         }
 
         [Test]
-        public void OpenApplication()
+        public void ClickButtonPersonalAccount()
         {
-           MainPageFLPageObject mainPageFLPage = new MainPageFLPageObject();
-           mainPageFLPage.ClickButtonPersonalAccount();
+            MainPageFLPageObject mainPageFLPage = new MainPageFLPageObject(_webDriver);
+            mainPageFLPage.ClickButtonPersonalAccount();
         }
 
 

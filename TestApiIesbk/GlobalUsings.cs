@@ -1,8 +1,14 @@
 global using NUnit.Framework;
+using Microsoft.Extensions.Configuration;
 using OpenQA.Selenium;
 
 class GlobalMethod
 {
+    //ƒобавл€ем файлы настроек в переменную дл€ доступа из всего приложени€ (путь до родительского каталога по умолчанию переопределили на свой)
+    public static IConfigurationRoot config = new ConfigurationBuilder().SetBasePath("C:\\Users\\SklyarovMD\\source\\repos\\TestApiIesbk\\TestApiIesbk").AddJsonFile("appsettings.json").Build();
+
+
+
     //ѕровер€ет есть ли элемент на странице или нет
     public static bool IsElementExists(By locator, IWebDriver webDriver)
     {
