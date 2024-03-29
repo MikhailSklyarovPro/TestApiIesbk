@@ -8,5 +8,6 @@ namespace TestApiIesbk.TestSuite.Fl
 {
     public class GetDataDeviceApiTest
     {
+        //пго
     }
 }

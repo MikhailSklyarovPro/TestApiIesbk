@@ -130,7 +130,7 @@ namespace TestApiIesbk.PageObject
             //Нажимаем на кнопку
             if (!GlobalMethod.WaitClick(_webDriver.FindElement(_buttonLoginTech))) { Assert.Fail("Кнопка войти не кликабельна"); }
             //Ищем боковую панель администратора для того чтобы проверить вошли или нет
-            if (!GlobalMethod.WaitFindElement(_adminPanel, _webDriver, 5)) { Assert.Fail("Не удалось войти в учетную запись администратора, а точнее не удалось найти боковую панель администратор."); }
+            if (!GlobalMethod.WaitFindElement(_adminPanel, _webDriver, 5)) { Assert.Fail("Не удалось войти в учетную запись администратора"); }
         }
     }
 }

@@ -7,14 +7,14 @@ class GlobalMethod
     //Добавляем файлы настроек в переменную для доступа из всего приложения (путь до родительского каталога по умолчанию переопределили на свой)
     public static IConfigurationRoot config = new ConfigurationBuilder()
         .SetBasePath("C:\\Users\\SklyarovMD\\source\\repos\\TestApiIesbk\\TestApiIesbk")
-        .AddJsonFile("testdataCommon.json")
+        .AddJsonFile("testdatacommon.json")
         .Build();
 
-    ////Добавляем тестовые данные для ФЛ в переменную для доступа из всего приложения (путь до родительского каталога по умолчанию переопределили на свой)
-    //public static IConfigurationRoot testDataFL = new ConfigurationBuilder()
-    //    .SetBasePath("C:\\Users\\SklyarovMD\\source\\repos\\TestApiIesbk\\TestApiIesbk\\TestSuite\\Fl")
-    //    .AddJsonFile("testdata.json")
-    //    .Build();
+    //Добавляем тестовые данные для ФЛ в переменную для доступа из всего приложения(путь до родительского каталога по умолчанию переопределили на свой)
+    public static IConfigurationRoot testDataFL = new ConfigurationBuilder()
+        .SetBasePath("C:\\Users\\SklyarovMD\\source\\repos\\TestApiIesbk\\TestApiIesbk")
+        .AddJsonFile("testdataFL.json")
+        .Build();
 
 
 
