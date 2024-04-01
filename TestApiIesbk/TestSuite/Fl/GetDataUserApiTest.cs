@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using System;
+using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
@@ -30,7 +32,7 @@ namespace TestApiIesbk.TestSuite.Fl
         }
 
         //Вход пользователя и получение токена авторизации
-        public string LoginUserAsync(string login, string password)
+        public string LoginUser(string login, string password)
         {
             //Параметры запроса(метод апи)
             string urlParametrs = "auth/login";
@@ -39,28 +41,30 @@ namespace TestApiIesbk.TestSuite.Fl
             //Создаем экземпляр класса для отправки запросов к веб-ресурсам
             HttpClient client = new HttpClient();
             //Задаем базовый путь до веб-ресурса
-            client.BaseAddress = new Uri(URL); 
+            client.BaseAddress = new Uri(URL);
 
             //Создаем модель для отправки тела запроса
-            SenderModel model = new SenderModel();
+            SenderModelLogin model = new SenderModelLogin();
             model.account = login;
             model.password = password;
 
             //Серилизуем модель в json
-            var json = JsonConvert.SerializeObject(model);
-            var data = new StringContent(json, Encoding.UTF8, "application/json");
+            string json = JsonConvert.SerializeObject(model);
+            StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
 
             //Делаем запрос к веб-ресурсу по пути URL+urlParameters. Result возращает результат выполнения запроса.
-            var response = client.PostAsync(URL, data).Result;
+            HttpResponseMessage response = client.PostAsync(URL, data).Result;
+
+            //Будет хранит токен авторизации
+            string token = "";
+
             //Создаем модель в которую запишем ответ от сервера
             ServerResponseLoginModel modelResult = new ServerResponseLoginModel();
             //Делаем проверку если ответ пришел усешный 200-300
             if (response.IsSuccessStatusCode) 
             {
-                //Ожидаем пока не получим значение. После получения читаем ответ как строку (в итоге будет json в виде строки)
-                string jsonResult = response.Content.ReadAsStringAsync().Result;
-                //Записываем ответ от сервера в модель 
-                modelResult = JsonConvert.DeserializeObject<ServerResponseLoginModel>(jsonResult)!;
+                //Записываем токен авторизации пришедший от сервера в перемнную
+                token = response.Headers.GetValues("Set-Cookie").First();
             }
             else
             {
@@ -73,11 +77,11 @@ namespace TestApiIesbk.TestSuite.Fl
             }
             client.Dispose();
             //Возвращаем токен авторизации или пустую строку
-            return modelResult.access_token;
+            return token;
         }
 
         //TODO:Получение данных пользователя
-        public ServerResponseUserInfoModel GetDataUser(string token)
+        public ServerResponseUserInfoModel GetDataUser(string model)
         {
             //Полученные данные
             ServerResponseUserInfoModel userInfo = new ServerResponseUserInfoModel();
@@ -91,10 +95,9 @@ namespace TestApiIesbk.TestSuite.Fl
             client.BaseAddress = new Uri(URL);
 
             // Добавляем заголовки к нашему запросу
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json")); //Добавляем какой тип ответа ожидаем - application/json
-            client.DefaultRequestHeaders.Add("Cookie", token);
-            //TODO:Authorization
-
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            // Добавляем в заголовок куки с токеном авторизации
+            client.DefaultRequestHeaders.Add("Cookie", model);
 
             //Делаем запрос к веб-ресурсу по пути URL+urlParameters. Result возращает результат выполнения запроса.
             HttpResponseMessage response = client.GetAsync(urlParametrs).Result;
@@ -125,16 +128,9 @@ namespace TestApiIesbk.TestSuite.Fl
         public void CheckDataUser(string login, string password, string balance)
         {
             //Получаем данные пользователя от API
-            ServerResponseUserInfoModel userData = GetDataUser(LoginUserAsync(login, password));
+            ServerResponseUserInfoModel userData = GetDataUser(LoginUser(login, password));
             //Проверка полученных данных от API на соответсвие тестовых данных в json файле
-            //if (balance != "userData.balance") { Assert.Fail($"Баланс: {balance} в тестовых данных не совпадает с полученным от API балансом: userData.balance"); }
+            if (balance != userData.account.balance.ToString()) { Assert.Fail($"Баланс: {balance} в тестовых данных не совпадает с полученным от API балансом: {userData.account.balance}"); }
         }
-    }
-
-
-    public class SenderModel
-    {
-        public string? account { get; set; }
-        public string? password { get; set; }
     }
 }

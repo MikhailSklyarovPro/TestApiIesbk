@@ -18,6 +18,18 @@
       "tech_login": "polychilos",
       "tech_password": "666666",
       "testsettings": {
+        "login": "10103005224",
+        "authenticator": "111111111",
+        "balance": 12663.44,
+        "device_id": "b9fec86f-d7ee-45f7-99cb-52577c438991"
+      }
+    },
+    {
+      "url": "https://api.enplus.ru/v2/webapifl/sbyt/api",
+      "type": "fl",
+      "tech_login": "polychilos",
+      "tech_password": "666666",
+      "testsettings": {
         "login": "ИНСВ123456",
         "authenticator": "Иванов",
         "balance": 123.45,
