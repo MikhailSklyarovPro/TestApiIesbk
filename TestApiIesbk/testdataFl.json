@@ -8,8 +8,8 @@
       "testsettings": {
         "login": "10103005224",
         "authenticator": "111111111",
-        "balance": 123.45,
-        "device_id": "b9fec86f-d7ee-45f7-99cb-52577c438991"
+        "balance": "123.45",
+        "device_id": "60909dbb-57c5-11e7-80d4-002481f90c3a"
       }
     },
     {
@@ -20,7 +20,7 @@
       "testsettings": {
         "login": "10103005224",
         "authenticator": "111111111",
-        "balance": 12663.44,
+        "balance": "12663.44",
         "device_id": "b9fec86f-d7ee-45f7-99cb-52577c438991"
       }
     },
@@ -32,7 +32,7 @@
       "testsettings": {
         "login": "ИНСВ123456",
         "authenticator": "Иванов",
-        "balance": 123.45,
+        "balance": "123.45",
         "device_id": "b9fec86f-d7ee-45f7-99cb-52577c438991"
       }
     }

@@ -102,8 +102,8 @@ C:\Users\admpc_SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\obj\Debug\net6.
 C:\Users\admpc_SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\obj\Debug\net6.0\TestApiIesbk.genruntimeconfig.cache
 C:\Users\admpc_SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\obj\Debug\net6.0\ref\TestApiIesbk.dll
 C:\Users\admpc_SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\nunit.framework.legacy.dll
-C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\testhost.exe
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\testhost.dll
+C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\testhost.exe
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\selenium-manager\linux\selenium-manager
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\selenium-manager\macos\selenium-manager
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\selenium-manager\windows\selenium-manager.exe
@@ -118,6 +118,14 @@ C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Test
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\TestApiIesbk.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\TestApiIesbk.pdb
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.VisualStudio.CodeCoverage.Shim.dll
+C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.Extensions.Configuration.dll
+C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.Extensions.Configuration.FileExtensions.dll
+C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Json.dll
+C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.Extensions.FileProviders.Physical.dll
+C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.Extensions.FileSystemGlobbing.dll
+C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.TestPlatform.CoreUtilities.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.TestPlatform.PlatformAbstractions.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.VisualStudio.TestPlatform.ObjectModel.dll
@@ -130,6 +138,8 @@ C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\nuni
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\nunit.framework.legacy.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\WebDriver.Support.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\WebDriver.dll
+C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\System.Text.Encodings.Web.dll
+C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\System.Text.Json.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\cs\Microsoft.TestPlatform.CoreUtilities.resources.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\cs\Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\de\Microsoft.TestPlatform.CoreUtilities.resources.dll
@@ -195,6 +205,7 @@ C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\zh-H
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\zh-Hant\Microsoft.TestPlatform.CommunicationUtilities.resources.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\zh-Hant\Microsoft.TestPlatform.CrossPlatEngine.resources.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\zh-Hant\Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\obj\Debug\net6.0\TestApiIesbk.csproj.AssemblyReference.cache
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\obj\Debug\net6.0\TestApiIesbk.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\obj\Debug\net6.0\TestApiIesbk.AssemblyInfoInputs.cache
@@ -206,14 +217,3 @@ C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\obj\Debug\net6.0\refi
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\obj\Debug\net6.0\TestApiIesbk.pdb
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\obj\Debug\net6.0\TestApiIesbk.genruntimeconfig.cache
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\obj\Debug\net6.0\ref\TestApiIesbk.dll
-C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.Extensions.Configuration.dll
-C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
-C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.Extensions.Configuration.FileExtensions.dll
-C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Json.dll
-C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.Extensions.FileProviders.Abstractions.dll
-C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.Extensions.FileProviders.Physical.dll
-C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.Extensions.FileSystemGlobbing.dll
-C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
-C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\System.Text.Encodings.Web.dll
-C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\System.Text.Json.dll
-C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll

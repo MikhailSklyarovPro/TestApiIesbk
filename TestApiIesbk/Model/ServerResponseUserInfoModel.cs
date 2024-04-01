@@ -61,7 +61,7 @@ namespace TestApiIesbk.Model
             public string number { get; set; }
 
             [JsonProperty("balance")]
-            public double balance { get; set; }
+            public string balance { get; set; }
 
             [JsonProperty("accruals")]
             public Accrual[] accruals { get; set; }
