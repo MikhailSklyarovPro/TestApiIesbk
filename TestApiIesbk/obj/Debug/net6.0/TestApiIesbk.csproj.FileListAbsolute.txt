@@ -113,6 +113,7 @@ C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\nuni
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\nunit.engine.api.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\nunit.engine.core.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\testcentric.engine.metadata.dll
+C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\testdataFl.json
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\TestApiIesbk.deps.json
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\TestApiIesbk.runtimeconfig.json
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\TestApiIesbk.dll

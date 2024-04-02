@@ -1,26 +1,44 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace TestApiIesbk.Model
 {
-    public class TestDataFlModel
+    public class TestData
     {
+        [JsonPropertyName("url")]
         public string url { get; set; }
+
+        [JsonPropertyName("type")]
         public string type { get; set; }
-        public string login { get; set; }
-        public string password { get; set; }
-        public Testsettings testsettings { get; set; }
+
+        [JsonPropertyName("tech_login")]
+        public string techLogin { get; set; }
+
+        [JsonPropertyName("tech_password")]
+        public string techPassword { get; set; }
+
+        [JsonPropertyName("testsettings")]
+        public Testsettings testSettings { get; set; }
+
 
         public class Testsettings
         {
+            [JsonPropertyName("login")]
             public string login { get; set; }
-            public string authenticator { get; set; }
-            public double balance { get; set; }
-            public string device_id { get; set; }
-        }
 
+            [JsonPropertyName("authenticator")]
+            public string authenticator { get; set; }
+
+            [JsonPropertyName("balance")]
+            public string balance { get; set; }
+
+            [JsonPropertyName("device_id")]
+            public string deviceId { get; set; }
+        }
     }
 }

@@ -30,7 +30,12 @@
 
   <ItemGroup>
     <Folder Include="TestSuite\Common\" />
-    <Folder Include="TestSuite\UL\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="testdataFl.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
