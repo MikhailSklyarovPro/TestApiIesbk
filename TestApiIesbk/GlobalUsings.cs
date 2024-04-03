@@ -1,5 +1,4 @@
 global using NUnit.Framework;
-using Microsoft.Extensions.Configuration;
 using OpenQA.Selenium;
 using System.Text.Json;
 using TestApiIesbk.Model;

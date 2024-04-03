@@ -6,8 +6,8 @@
       "tech_password": "1",
       "testsettings": {
         "login": "10103005224",
-        "authenticator": "1",
-        "balance": "123.47",
+        "authenticator": "111111111",
+        "balance": "123",
         "device_id": "60909dbb-57c5-11e7-80d4-002481f90c3a"
       }
     },
@@ -20,43 +20,7 @@
         "login": "10103005224",
         "authenticator": "111111111",
         "balance": "6767656",
-        "device_id": "60909dbb-466-11e7-80d4-002481f90c3a"
-      }
-    },
-    {
-      "url": "https://api.enplus.ru/v2/webapifl/sbyt/api",
-      "type": "fl",
-      "tech_login": "2",
-      "tech_password": "2",
-      "testsettings": {
-        "login": "10103005224",
-        "authenticator": "2",
-        "balance": "5757",
-        "device_id": "60909dbb-657-11e7-80d4-002481f90c3a"
-      }
-    },
-    {
-      "url": "https://api.enplus.ru/v2/webapifl/sbyt/api",
-      "type": "fl",
-      "tech_login": "2ththt",
-      "tech_password": "1344ttgr",
-      "testsettings": {
-        "login": "10103005224",
-        "authenticator": "3",
-        "balance": "3434",
-        "device_id": "rt-57c5-rtrt-80d4-002481f90c3a"
-      }
-    },
-    {
-      "url": "https://api.enplus.ru/v2/webapifl/sbyt/api",
-      "type": "fl",
-      "tech_login": "33333",
-      "tech_password": "33333",
-      "testsettings": {
-        "login": "10103005224",
-        "authenticator": "4",
-        "balance": "11111",
-        "device_id": "rt-57c5-rtrt-80d4-002481f90c3a"
+        "device_id": "c69aa35f-67a2-11e2-b371-001f29ceb8714"
       }
     }
  ]

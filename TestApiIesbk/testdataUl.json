@@ -1,5 +1,4 @@
-{
-  "suite": [
+[
     {
       "url": "https://api.enplus.ru/v2/webapiul/sbyt/api",
       "type": "ul",
@@ -39,5 +38,4 @@
         "device_id": "b9fec86f-d7ee-45f7-99cb-52577c438991"
       }
     }
-  ]
-}
+]

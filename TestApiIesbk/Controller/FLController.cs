@@ -7,6 +7,7 @@ namespace TestApiIesbk.Controller
 {
     public class FLController
     {
+        //Получение тестовых данных
         public static List<TestData> GetTestData()
         {
 
@@ -94,8 +95,9 @@ namespace TestApiIesbk.Controller
             {
                 //Ожидаем пока не получим значение. После получения читаем ответ как строку (в итоге будет json в виде строки)
                 string jsonResult = response.Content.ReadAsStringAsync().Result;
+
+                //TODO: здесь ошибка. После преобразования получаеться пустой список
                 devices = JsonSerializer.Deserialize<List<ServerResponseDevicesModel>>(jsonResult)!;
-                Assert.Fail("test:"+ devices[0].Id);
             }
             else
             {
