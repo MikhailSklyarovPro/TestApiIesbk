@@ -1,5 +1,5 @@
 ﻿using OpenQA.Selenium;
-namespace TestApiIesbk.PageObject
+namespace TestApiIesbk.TestSuite
 {
 
     public class MainPageFLPageObject

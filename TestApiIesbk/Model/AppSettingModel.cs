@@ -15,5 +15,8 @@ namespace TestApiIesbk.Model
 
         [JsonPropertyName("SiteURLCommon")]
         public string SiteURLCommon { get; set; }
+
+        [JsonPropertyName("PathReportTest")]
+        public string PathReportTest { get; set; }
     }
 }

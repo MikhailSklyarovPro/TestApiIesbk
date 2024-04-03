@@ -3,7 +3,7 @@
 
 namespace TestApiIesbk.Model
 {
-    public class TestData
+    public class TestDataFL
     {
         [JsonPropertyName("url")]
         public string url { get; set; }

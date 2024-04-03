@@ -1,16 +1,18 @@
-﻿using TestApiIesbk.Controller;
+﻿using Aspose.Html;
+using NUnit.Framework.Interfaces;
+using TestApiIesbk.Controller;
 using TestApiIesbk.Model;
 
-namespace TestApiIesbk.TestSuite.Fl
+namespace TestApiIesbk.TestSuite
 {
     public class LoginApiTest
     {
         //Метод, который возвращает данные из тестового набора (json файла)
         public static IEnumerable<TestCaseData> GetParametrs()
         {
-            List<TestData> testData = FLController.GetTestData();
+            List<TestDataFL> testData = FLController.GetTestData();
             //Перебераем в цикле все вложенные элементы в секцию suite
-            foreach (TestData item in testData)
+            foreach (TestDataFL item in testData)
             {
                 string login = item.testSettings.login;
                 string password = item.testSettings.authenticator;
@@ -25,6 +27,34 @@ namespace TestApiIesbk.TestSuite.Fl
         public void LoginUser(string login, string password)
         {
             FLController.LoginUser(login, password);
+        }
+
+        //Вызвывается после завершения теста
+        [TearDown]
+        public void TearDown()
+        {
+            RowTableReportModel rowTable = new RowTableReportModel();
+            rowTable.numberTest = "1";
+            rowTable.parentClass = "test";
+            rowTable.result = "result";
+            rowTable.timeExecution = "time";
+            rowTable.message = "message";
+            GlobalMethod.ListRowTableReport.Add(rowTable);
+
+            //if (TestContext.CurrentContext.Result.Outcome == ResultState.Ignored)
+            //{
+
+            //}
+
+            //if(TestContext.CurrentContext.Result.Outcome == ResultState.Failure)
+            //{
+
+            //}
+
+            //if(TestContext.CurrentContext.Result.Outcome == ResultState.Success)
+            //{
+
+            //}
         }
     }
 }

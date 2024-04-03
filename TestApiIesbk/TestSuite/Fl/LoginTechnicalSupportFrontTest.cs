@@ -1,10 +1,8 @@
 ﻿using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
-using TestApiIesbk.PageObject;
-using TestApiIesbk.Controller;
 using TestApiIesbk.Model;
 
-namespace TestApiIesbk.TestSuite.Fl
+namespace TestApiIesbk.TestSuite
 {
     public class LoginTechnicalSupportFrontTest
     {
@@ -12,10 +10,10 @@ namespace TestApiIesbk.TestSuite.Fl
         //Метод, который возвращает из набора тестовых данных (json файл) логин и пароль пользователя техподдержки.
         private static IEnumerable<TestCaseData> GetTestData()
         {
-            List<TestData> testData = FLController.GetTestData();
+            List<TestDataFL> testData = FLController.GetTestData();
 
             //Перебераем в цикле все вложенные элементы в секцию
-            foreach (TestData item in testData)
+            foreach (TestDataFL item in testData)
             {
                 string login = item.testSettings.login;
                 string password = item.testSettings.authenticator;

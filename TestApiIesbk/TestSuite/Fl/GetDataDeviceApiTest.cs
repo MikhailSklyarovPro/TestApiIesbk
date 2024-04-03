@@ -1,16 +1,16 @@
 ﻿using TestApiIesbk.Controller;
 using TestApiIesbk.Model;
 
-namespace TestApiIesbk.TestSuite.Fl
+namespace TestApiIesbk.TestSuite
 {
     public class GetDataDeviceApiTest
     {
         //Метод, который возвращает из набора тестовых данных (json файл) логин, пароль и id прибора учета
         private static IEnumerable<TestCaseData> GetTestData()
         {
-            List<TestData> testData = FLController.GetTestData();
+            List<TestDataFL> testData = FLController.GetTestData();
             //Перебераем в цикле все вложенные элементы в секцию suite
-            foreach (TestData item in testData)
+            foreach (TestDataFL item in testData)
             {
                 string login = item.testSettings.login;
                 string password = item.testSettings.authenticator;

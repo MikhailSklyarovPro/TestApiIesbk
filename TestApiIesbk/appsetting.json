@@ -2,5 +2,6 @@
   "ApiUrl": "https://webapisbytfl.dev.enplus.digital/api/",
   "SiteURLFL": "https://sbyt-irkutskenergo.dev.enplus.digital/",
   "SiteURLUL": "https://lkul-iesbk.dev.enplus.digital",
-  "SiteURLCommon": "https://sbyt-irkutskenergo.dev.enplus.digital/"
+  "SiteURLCommon": "https://sbyt-irkutskenergo.dev.enplus.digital/",
+  "PathReportTest": "C:\\Users\\SklyarovMD\\source\\repos\\TestApiIesbk\\TestApiIesbk\\reportTest.html"
 }

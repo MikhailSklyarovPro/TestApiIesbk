@@ -3,16 +3,16 @@ using System.Text;
 using System.Text.Json;
 using TestApiIesbk.Model;
 
-namespace TestApiIesbk.Controller
+namespace TestApiIesbk.TestSuite
 {
     public class FLController
     {
         //Получение тестовых данных
-        public static List<TestData> GetTestData()
+        public static List<TestDataFL> GetTestData()
         {
 
             string jsonString = File.ReadAllText("C:\\Users\\SklyarovMD\\source\\repos\\TestApiIesbk\\TestApiIesbk\\testdataFl.json");
-            List<TestData> testData = JsonSerializer.Deserialize<List<TestData>>(jsonString)!;
+            List<TestDataFL> testData = JsonSerializer.Deserialize<List<TestDataFL>>(jsonString)!;
             return testData;
         }
 

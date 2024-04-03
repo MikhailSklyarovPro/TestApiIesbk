@@ -8,7 +8,7 @@
         "login": "АНООТ000111",
         "authenticator": "3808124548",
         "contract_id": "0b56ac1d-9973-40ee-80a1-6391182b9143",
-        "balance": 123.45,
+        "balance": "123.45",
         "device_id": "b9fec86f-d7ee-45f7-99cb-52577c438991"
       }
     },
@@ -21,7 +21,7 @@
         "login": "АНООТ000111",
         "authenticator": "3808124548",
         "contract_id": "0b56ac1d-9973-40ee-80a1-6391182b9143",
-        "balance": 123.45,
+        "balance": "123.45",
         "device_id": "b9fec86f-d7ee-45f7-99cb-52577c438991"
       }
     },
@@ -34,7 +34,7 @@
         "login": "АНООТ000111",
         "authenticator": "3808124548",
         "contract_id": "0b56ac1d-9973-40ee-80a1-6391182b9143",
-        "balance": 123.45,
+        "balance": "123.45",
         "device_id": "b9fec86f-d7ee-45f7-99cb-52577c438991"
       }
     }
