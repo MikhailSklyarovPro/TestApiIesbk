@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "TjCbFyffRU24181t3QfLXAYtZDCL7K9LgtTo230u/puwX8sRl0lKh+yf44IsRrmPsujqJ9pvLBk1+cF3hl82ag==",
+  "dgSpecHash": "tm11HE+qnb/sxAy7I2Hp/48nV3H1ECvsk0o8X1tfz/UNqauNeoDyJOwaZH3H0d9hGWsOwGzsXFp59sCdJV+Itg==",
   "success": true,
   "projectFilePath": "C:\\Users\\SklyarovMD\\source\\repos\\TestApiIesbk\\TestApiIesbk\\TestApiIesbk.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\SklyarovMD\\.nuget\\packages\\aspose.html\\24.3.0\\aspose.html.24.3.0.nupkg.sha512",
     "C:\\Users\\SklyarovMD\\.nuget\\packages\\coverlet.collector\\6.0.2\\coverlet.collector.6.0.2.nupkg.sha512",
+    "C:\\Users\\SklyarovMD\\.nuget\\packages\\htmlagilitypack\\1.11.60\\htmlagilitypack.1.11.60.nupkg.sha512",
     "C:\\Users\\SklyarovMD\\.nuget\\packages\\microsoft.codecoverage\\17.9.0\\microsoft.codecoverage.17.9.0.nupkg.sha512",
     "C:\\Users\\SklyarovMD\\.nuget\\packages\\microsoft.extensions.configuration\\8.0.0\\microsoft.extensions.configuration.8.0.0.nupkg.sha512",
     "C:\\Users\\SklyarovMD\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\8.0.0\\microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",

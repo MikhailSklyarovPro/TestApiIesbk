@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="Aspose.HTML" Version="24.3.0" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.60" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
@@ -30,13 +31,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="TestSuite\Common\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="testdataFl.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ScreenshotFailedTest\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>

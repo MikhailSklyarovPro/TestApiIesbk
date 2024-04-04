@@ -3,10 +3,10 @@
       "url": "https://api.enplus.ru/v2/webapifl/sbyt/api",
       "type": "fl",
       "tech_login": "Misha",
-      "tech_password": "1",
+      "tech_password": "111111111",
       "testsettings": {
         "login": "10103005224",
-        "authenticator": "111111111",
+        "authenticator": "Бухарова",
         "balance": "123",
         "device_id": "60909dbb-57c5-11e7-80d4-002481f90c3a"
       }
@@ -15,10 +15,10 @@
     "url": "https://api.enplus.ru/v2/webapifl/sbyt/api",
     "type": "fl",
     "tech_login": "Misha",
-    "tech_password": "3",
+    "tech_password": "111111111",
     "testsettings": {
-      "login": "10103005224",
-      "authenticator": "111111111",
+      "login": "12",
+      "authenticator": "443",
       "balance": "6767656",
       "device_id": "c69aa35f-67a2-11e2-b371-001f29ceb8714"
     }
@@ -26,8 +26,8 @@
   {
     "url": "https://api.enplus.ru/v2/webapifl/sbyt/api",
     "type": "fl",
-    "tech_login": "3",
-    "tech_password": "43",
+    "tech_login": "Oleg",
+    "tech_password": "111111111",
     "testsettings": {
       "login": "12",
       "authenticator": "443",

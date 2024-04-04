@@ -119,6 +119,7 @@ C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Test
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\TestApiIesbk.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\TestApiIesbk.pdb
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Aspose.HTML.dll
+C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\HtmlAgilityPack.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.VisualStudio.CodeCoverage.Shim.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.Extensions.Configuration.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll

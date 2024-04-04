@@ -18,5 +18,9 @@ namespace TestApiIesbk.Model
 
         [JsonPropertyName("PathReportTest")]
         public string PathReportTest { get; set; }
+
+        [JsonPropertyName("ScreenshotFailedTest")]
+        public string ScreenshotFailedTest { get; set; }
+        
     }
 }

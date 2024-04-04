@@ -27,71 +27,77 @@ namespace TestApiIesbk.TestSuite
         }
 
         //Нажатие на кнопку личный кабинет
-        public void ClickButtonPersonalAccount()
+        public void ClickButtonPersonalAccount(string message)
         {
             //Ищем кнопку входа в личный кабинет
-            if (!GlobalMethod.WaitFindElement(_buttonPersonalAccount, _webDriver, 5)) { Assert.Fail("Не удалось найти кнопку входа в личный кабинет"); }
+            if (!GlobalMethod.WaitFindElement(_buttonPersonalAccount, _webDriver, 5)) { _webDriver.Quit(); Assert.Fail($"{message} Не удалось найти кнопку входа в личный кабинет"); }
             //Нажимаем кнопку входа в личный кабинет
-            if (!GlobalMethod.WaitClick(_webDriver.FindElement(_buttonPersonalAccount), 3)) { Assert.Fail("Кнопка входа в личный кабинет не кликабельна"); }
+            if (!GlobalMethod.WaitClick(_webDriver.FindElement(_buttonPersonalAccount), 3)) { _webDriver.Quit(); Assert.Fail($"{message} Кнопка входа в личный кабинет не кликабельна"); }
         }
 
         //Выбираем радиобатон (частным лицам /для бизнеса)
-        public void ChoiceRadioButtonFL()
+        public void ChoiceRadioButtonFL(string message)
         {
             //Ищем радиобаттон
-            if (!GlobalMethod.WaitFindElement(_radioButtonFL, _webDriver, 5)) { Assert.Fail("Не удалось найти радиобаттон частным лицам"); }
+            if (!GlobalMethod.WaitFindElement(_radioButtonFL, _webDriver, 5)) { _webDriver.Quit(); Assert.Fail($"{message} Не удалось найти радиобаттон частным лицам"); }
             //Нажимаем на радиобаттон
-            if (!GlobalMethod.WaitClick(_webDriver.FindElement(_radioButtonFL), 3)) { Assert.Fail("Радиобаттон частным лицам не кликабелен"); }
+            if (!GlobalMethod.WaitClick(_webDriver.FindElement(_radioButtonFL), 3)) { _webDriver.Quit(); Assert.Fail($"{message} Радиобаттон частным лицам не кликабелен"); }
 
 
             //Ищем кнопку далее
-            if (!GlobalMethod.WaitFindElement(_buttonBackChoiceFL, _webDriver, 5)) { Assert.Fail("Не удалось найти кнопку далее"); }
+            if (!GlobalMethod.WaitFindElement(_buttonBackChoiceFL, _webDriver, 5)) { _webDriver.Quit(); Assert.Fail($"{message} Не удалось найти кнопку далее"); }
             //Нажимаем на кнопку далее
-            if (!GlobalMethod.WaitClick(_webDriver.FindElement(_buttonBackChoiceFL), 3)) { Assert.Fail("Кнопка далее не кликабельна"); }
+            if (!GlobalMethod.WaitClick(_webDriver.FindElement(_buttonBackChoiceFL), 3)) { _webDriver.Quit(); Assert.Fail($"{message} Кнопка далее не кликабельна"); }
         }
 
         //Выбираем радиобатон способа входа (по логину и паролю)
-        public void ChoiceRadioButtonMethodLogin()
+        public void ChoiceRadioButtonMethodLogin(string message)
         {
             //Ищем радиобаттон
-            if (!GlobalMethod.WaitFindElement(_radioButtonMethodLogin, _webDriver, 5)) { Assert.Fail("Не удалось найти радиобаттон частным лицам"); }
+            if (!GlobalMethod.WaitFindElement(_radioButtonMethodLogin, _webDriver, 5)) { _webDriver.Quit(); Assert.Fail($"{message} Не удалось найти радиобаттон частным лицам"); }
             //Нажимаем на радиобаттон
-            if (!GlobalMethod.WaitClick(_webDriver.FindElement(_radioButtonMethodLogin), 3)) { Assert.Fail("Радиобаттон частным лицам не кликабелен"); }
+            if (!GlobalMethod.WaitClick(_webDriver.FindElement(_radioButtonMethodLogin), 3)) { _webDriver.Quit(); Assert.Fail($"{message} Радиобаттон частным лицам не кликабелен"); }
 
 
             //Ищем кнопку далее
-            if (!GlobalMethod.WaitFindElement(_buttonBackChoiceMethodLogin, _webDriver, 5)) { Assert.Fail("Не удалось найти кнопку далее"); }
+            if (!GlobalMethod.WaitFindElement(_buttonBackChoiceMethodLogin, _webDriver, 5)) { _webDriver.Quit(); Assert.Fail($"{message} Не удалось найти кнопку далее"); }
             //Нажимаем на кнопку далее
-            if (!GlobalMethod.WaitClick(_webDriver.FindElement(_buttonBackChoiceMethodLogin), 3)) { Assert.Fail("Кнопка далее не кликабельна"); }
+            if (!GlobalMethod.WaitClick(_webDriver.FindElement(_buttonBackChoiceMethodLogin), 3)) { _webDriver.Quit(); Assert.Fail($"{message} Кнопка далее не кликабельна"); }
         }
 
         //Вводим номер лицевого счета
-        public void EnterNumberAccount(string login)
+        public void EnterNumberAccount(string login, string message)
         {
             //Ищем поле для ввода номера лс
-            if (!GlobalMethod.WaitFindElement(_inputNumberAccount, _webDriver, 5)) { Assert.Fail("Не удалось найти поле для ввода"); }
+            if (!GlobalMethod.WaitFindElement(_inputNumberAccount, _webDriver, 5)) { _webDriver.Quit(); Assert.Fail($"{message} Не удалось найти поле для ввода"); }
             //Устанавливаем значение в поле для ввода
-            if (!GlobalMethod.WaitSendKey(_inputNumberAccount, _webDriver, login)) { Assert.Fail("Не удалось установить значение в поле для ввода номера лицевого счета"); }
+            if (!GlobalMethod.WaitSendKey(_inputNumberAccount, _webDriver, login)) { _webDriver.Quit(); Assert.Fail($"{message} Не удалось установить значение в поле для ввода номера лицевого счета"); }
         }
 
         //Вводим пароль
-        public void EnterPassword(string password)
+        public void EnterPassword(string password, string message)
         {
             //Ищем поле для ввода пароля
-            if (!GlobalMethod.WaitFindElement(_inputPassword, _webDriver, 5)) { Assert.Fail("Не удалось найти поле для ввода"); }
+            if (!GlobalMethod.WaitFindElement(_inputPassword, _webDriver, 5)) { _webDriver.Quit(); Assert.Fail($"{message} Не удалось найти поле для ввода"); }
             //Устанавливаем значение в поле для ввода
-            if (!GlobalMethod.WaitSendKey(_inputPassword, _webDriver, password)) { Assert.Fail("Не удалось установить значение в поле для ввода пароля"); }
+            if (!GlobalMethod.WaitSendKey(_inputPassword, _webDriver, password)) { _webDriver.Quit(); Assert.Fail($"{message} Не удалось установить значение в поле для ввода пароля"); }
         }
 
         //Нажимаем на кнопку войти
-        public void ClickButtonLogin()
+        public void ClickButtonLogin(string message)
         {
             //Ищем кнопку войти
-            if (!GlobalMethod.WaitFindElement(_buttonLogin, _webDriver, 5)) { Assert.Fail("Не удалось найти кнопку войти"); }
+            if (!GlobalMethod.WaitFindElement(_buttonLogin, _webDriver, 5)) { _webDriver.Quit(); Assert.Fail($"{message} Не удалось найти кнопку войти"); }
             //Нажимаем на кнопку
-            if (!GlobalMethod.WaitClick(_webDriver.FindElement(_buttonLogin))) { Assert.Fail("Кнопка войти не кликабельна"); }
+            if (!GlobalMethod.WaitClick(_webDriver.FindElement(_buttonLogin))) { _webDriver.Quit(); Assert.Fail($"{message} Кнопка войти не кликабельна"); }
             //Ищем заголовок Личный кабинет физического лица чтобы проверить вошли или нет
-            if (!GlobalMethod.WaitFindElement(_titlePersonalAccount, _webDriver, 5)) { Assert.Fail("Не удалось войти в личный кабинет физического лица"); }
+            if (!GlobalMethod.WaitFindElement(_titlePersonalAccount, _webDriver, 5)) 
+            {
+                Screenshot screenshot = ((ITakesScreenshot)_webDriver).GetScreenshot();
+                screenshot.SaveAsFile($"{GlobalMethod.GetAppSetting().ScreenshotFailedTest}\\{GlobalMethod.numberTest}.jpg");
+                _webDriver.Close(); 
+                Assert.Fail($"{message} Не удалось войти в личный кабинет физического лица"); 
+            }
             
         }
 
