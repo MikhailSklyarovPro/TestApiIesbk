@@ -119,7 +119,9 @@ C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Test
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\TestApiIesbk.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\TestApiIesbk.pdb
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Aspose.HTML.dll
+C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\BouncyCastle.Cryptography.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\HtmlAgilityPack.dll
+C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\MailKit.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.VisualStudio.CodeCoverage.Shim.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.Extensions.Configuration.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
@@ -138,6 +140,7 @@ C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Micr
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.TestPlatform.Utilities.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.VisualStudio.TestPlatform.Common.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\MimeKit.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\nunit.framework.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\nunit.framework.legacy.dll
@@ -145,7 +148,10 @@ C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\WebD
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\WebDriver.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\System.Drawing.Common.dll
+C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\System.Formats.Asn1.dll
+C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\System.Security.Cryptography.Pkcs.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\System.Security.Permissions.dll
+C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\System.Text.Encoding.CodePages.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\System.Text.Encodings.Web.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\System.Text.Json.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\cs\Microsoft.TestPlatform.CoreUtilities.resources.dll
@@ -216,6 +222,8 @@ C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\zh-H
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Text.Encoding.CodePages.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\obj\Debug\net6.0\TestApiIesbk.csproj.AssemblyReference.cache
 C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\obj\Debug\net6.0\TestApiIesbk.GeneratedMSBuildEditorConfig.editorconfig

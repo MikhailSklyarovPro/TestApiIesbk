@@ -29,6 +29,9 @@ namespace TestIesbk
             [JsonPropertyName("authenticator")]
             public string authenticator { get; set; }
 
+            [JsonPropertyName("password")]
+            public string password { get; set; }
+
             [JsonPropertyName("balance")]
             public string balance { get; set; }
 

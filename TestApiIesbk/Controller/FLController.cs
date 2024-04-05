@@ -3,7 +3,7 @@ using System.Text;
 using System.Text.Json;
 using TestApiIesbk;
 
-namespace TestIesbk
+namespace TestIesbk.FL
 {
     public class FLController
     {
@@ -23,7 +23,7 @@ namespace TestIesbk
             string urlParametrs = "auth/login";
 
             //Основной путь  
-            string URL = GlobalMethod.GetAppSetting().ApiUrl + urlParametrs;
+            string URL = GlobalMethod.GetAppSetting().ApiUrlFL + urlParametrs;
             //Создаем экземпляр класса для отправки запросов к веб-ресурсам
             HttpClient client = new HttpClient();
             //Задаем базовый путь до веб-ресурса
@@ -73,7 +73,7 @@ namespace TestIesbk
             string urlParametrs = "service/tech/auth/login";
 
             //Основной путь  
-            string URL = GlobalMethod.GetAppSetting().ApiUrl + urlParametrs;
+            string URL = GlobalMethod.GetAppSetting().ApiUrlFL + urlParametrs;
             //Создаем экземпляр класса для отправки запросов к веб-ресурсам
             HttpClient client = new HttpClient();
             //Задаем базовый путь до веб-ресурса
@@ -123,7 +123,7 @@ namespace TestIesbk
             string urlParametrs = "auth/login_tech";
 
             //Основной путь  
-            string URL = GlobalMethod.GetAppSetting().ApiUrl + urlParametrs;
+            string URL = GlobalMethod.GetAppSetting().ApiUrlFL + urlParametrs;
             //Создаем экземпляр класса для отправки запросов к веб-ресурсам
             HttpClient client = new HttpClient();
             //Задаем базовый путь до веб-ресурса
@@ -162,7 +162,7 @@ namespace TestIesbk
                 //Записываем ответ от сервера в модель 
                 ServerResponseErrorModel errorModel = JsonSerializer.Deserialize<ServerResponseErrorModel>(jsonResult)!;
                 //Выводим ошибку от сервера
-                Assert.Fail($"Действие: Вход пользователя в ЛК ФЛ из под ЛК техподдержки. Результат: Не удалось войти! код ошибки: {errorModel.code}, текст ошибки: {errorModel.message}");
+                Assert.Fail($"Действие: Вход пользователя в ЛК из под ЛК техподдержки. Результат: Не удалось войти! код ошибки: {errorModel.code}, текст ошибки: {errorModel.message}");
             }
             client.Dispose();
             //Возвращаем токен авторизации или пустую строку
@@ -170,14 +170,14 @@ namespace TestIesbk
         }
 
         //Получаем все приборы учета пользователя по токену авторизации
-        public static List<ServerResponseDevicesModel> GetDevices(string token)
+        public static List<ServerResponseDevicesFLModel> GetDevices(string token)
         {
             //Полученные данные
-            List<ServerResponseDevicesModel> devices = new List<ServerResponseDevicesModel>();
+            List<ServerResponseDevicesFLModel> devices = new List<ServerResponseDevicesFLModel>();
             //Параметры запроса(метод апи)
             string urlParametrs = "account/devices";
             //Основной путь  
-            string URL = GlobalMethod.GetAppSetting().ApiUrl;
+            string URL = GlobalMethod.GetAppSetting().ApiUrlFL;
             //Создаем экземпляр класса для отправки запросов к веб-ресурсам
             HttpClient client = new HttpClient();
             //Задаем базовый путь до веб-ресурса
@@ -196,8 +196,7 @@ namespace TestIesbk
                 //Ожидаем пока не получим значение. После получения читаем ответ как строку (в итоге будет json в виде строки)
                 string jsonResult = response.Content.ReadAsStringAsync().Result;
 
-                //TODO: здесь ошибка. После преобразования получаеться пустой список
-                devices = JsonSerializer.Deserialize<List<ServerResponseDevicesModel>>(jsonResult)!;
+                devices = JsonSerializer.Deserialize<List<ServerResponseDevicesFLModel>>(jsonResult)!;
             }
             else
             {
@@ -206,21 +205,21 @@ namespace TestIesbk
                 //Записываем ответ от сервера в модель 
                 ServerResponseErrorModel errorModel = JsonSerializer.Deserialize<ServerResponseErrorModel>(jsonResult)!;
                 //Выводим ошибку от сервера
-                Assert.Fail($"Произошла ошибка! код ошибки: {errorModel.code}, текст ошибки: {errorModel.message} URL:{URL}");
+                Assert.Fail($"Действие: Получение приборов учета пользователя, зайденного в ЛК ФЛ из под ЛК техподдержки. Результат: Произошла ошибка! код ошибки: {errorModel.code}, текст ошибки: {errorModel.message} URL:{URL}");
             }
             client.Dispose();
             return devices;
         }
 
         //Получение данных пользователя
-        public static ServerResponseUserInfoModel GetDataUser(string token)
+        public static ServerResponseUserInfoFLModel GetDataUser(string token)
         {
             //Полученные данные
-            ServerResponseUserInfoModel userInfo = new ServerResponseUserInfoModel();
+            ServerResponseUserInfoFLModel userInfo = new ServerResponseUserInfoFLModel();
             //Параметры запроса(метод апи)
             string urlParametrs = "user/info";
             //Основной путь  
-            string URL = GlobalMethod.GetAppSetting().ApiUrl;
+            string URL = GlobalMethod.GetAppSetting().ApiUrlFL;
             //Создаем экземпляр класса для отправки запросов к веб-ресурсам
             HttpClient client = new HttpClient();
             //Задаем базовый путь до веб-ресурса
@@ -238,7 +237,7 @@ namespace TestIesbk
             {
                 //Ожидаем пока не получим значение. После получения читаем ответ как строку (в итоге будет json в виде строки)
                 string jsonResult = response.Content.ReadAsStringAsync().Result;
-                userInfo = JsonSerializer.Deserialize<ServerResponseUserInfoModel>(jsonResult)!;
+                userInfo = JsonSerializer.Deserialize<ServerResponseUserInfoFLModel>(jsonResult)!;
             }
             else
             {
@@ -247,7 +246,7 @@ namespace TestIesbk
                 //Записываем ответ от сервера в модель 
                 ServerResponseErrorModel errorModel = JsonSerializer.Deserialize<ServerResponseErrorModel>(jsonResult)!;
                 //Выводим ошибку от сервера
-                Assert.Fail($"Произошла ошибка! код ошибки: {errorModel.code}, текст ошибки: {errorModel.message} URL:{URL}");
+                Assert.Fail($"Действие: Получение данных пользователя (баланса), зайденного в ЛК ФЛ из под ЛК техподдержки. Результат: Произошла ошибка! код ошибки: {errorModel.code}, текст ошибки: {errorModel.message} URL:{URL}");
             }
             client.Dispose();
             return userInfo;

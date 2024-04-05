@@ -5,13 +5,26 @@
       "tech_login": "Misha",
       "tech_password": "111111111",
       "testsettings": {
-        "login": "АНООТ000111",
-        "authenticator": "3808124548",
-        "contract_id": "0b56ac1d-9973-40ee-80a1-6391182b9143",
+        "login": "724",
+        "authenticator": "111111111",
+        "contract_id": "264fde0e-f36d-11ea-80c4-9457a553d5eb",
         "balance": "123.45",
-        "device_id": "b9fec86f-d7ee-45f7-99cb-52577c438991"
+        "device_id": "4a45b3dw81-95bc-11e2-a6cf-0018fe779ae6"
       }
     },
+  {
+    "url": "https://api.enplus.ru/v2/webapiul/sbyt/api",
+    "type": "ul",
+    "tech_login": "Misha",
+    "tech_password": "111111111",
+    "testsettings": {
+      "login": "724",
+      "authenticator": "111111111",
+      "contract_id": "264fde0e-f36d-11ea-80c4-9457a553d5eb",
+      "balance": "54484,48",
+      "device_id": "4a45b381-95bc-11e2-a6cf-0018fe779ae6"
+    }
+  },
     {
       "url": "https://api.enplus.ru/v2/webapiul/sbyt/api",
       "type": "ul",
@@ -20,22 +33,9 @@
       "testsettings": {
         "login": "АНООТ000111",
         "authenticator": "3808124548",
-        "contract_id": "0b56ac1d-9973-40ee-80a1-6391182b9143",
+        "contract_id": "264fde0e-f36d-11ea-80c4-9457a553d5eb",
         "balance": "123.45",
-        "device_id": "b9fec86f-d7ee-45f7-99cb-52577c438991"
-      }
-    },
-    {
-      "url": "https://api.enplus.ru/v2/webapiul/sbyt/api",
-      "type": "ul",
-      "tech_login": "testuser",
-      "tech_password": "111111111",
-      "testsettings": {
-        "login": "АНООТ000111",
-        "authenticator": "3808124548",
-        "contract_id": "0b56ac1d-9973-40ee-80a1-6391182b9143",
-        "balance": "123.45",
-        "device_id": "b9fec86f-d7ee-45f7-99cb-52577c438991"
+        "device_id": "4a45b381-95bc-11e2-a6cf-0018fe779ae6"
       }
     }
 ]

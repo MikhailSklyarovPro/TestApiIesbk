@@ -4,53 +4,17 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System.Text.Json;
 using TestApiIesbk;
+using TestApiIesbk.UL;
+using TestIesbk.Common;
+using TestIesbk.FL;
+using TestIesbk.PageObject;
+using TestIesbk.UL;
 
 namespace TestIesbk
 {
     [TestFixture]
     public class TestSuite
     {
-
-        //Метод, который возвращает данные из тестового набора (json файла) для ФЛ
-        public static IEnumerable<TestCaseData> GetParametrs(string typeFice)
-        {
-
-            switch (typeFice)
-            {
-                case "FL":
-                    List<TestDataFL> testDataFL = FLController.GetTestData();
-                    //Перебераем в цикле все вложенные элементы в секцию suite
-                    foreach (TestDataFL item in testDataFL)
-                    {
-                        //Отправляем полученные данные на вход теста
-                        yield return new TestCaseData(item, ++GlobalMethod.numberTest);
-                    }
-                    break;
-
-                case "UL":
-                    List<TestDataUL> testDataUL = ULController.GetTestData();
-                    //Перебераем в цикле все вложенные элементы в секцию suite
-                    foreach (TestDataUL item in testDataUL)
-                    {
-                        //Отправляем полученные данные на вход теста
-                        yield return new TestCaseData(item, ++GlobalMethod.numberTest);
-                    }
-                    break;
-
-                case "Common":
-                    List<TestDataCommon> testDataCommon = CommonController.GetTestData();
-                    //Перебераем в цикле все вложенные элементы в секцию suite
-                    foreach (TestDataCommon item in testDataCommon)
-                    {
-                        //Отправляем полученные данные на вход теста
-                        yield return new TestCaseData(item, ++GlobalMethod.numberTest);
-                    }
-                    break;
-            }
-        }
-
-
-
 
         //Выполняется перед запуском всех тестов
         [OneTimeSetUp]
@@ -108,165 +72,268 @@ namespace TestIesbk
 
 
 
-
-        //Метод выполняет тест. Принимает в параметры тестовые данные.
-        [Test, TestCaseSource(nameof(GetParametrs), new object[] { "FL" })]
-        public void LoginFlAPI(TestDataFL testData, int numberTest)
+        [TestFixture]
+        public class FL 
         {
-            FLController.LoginUser(testData.testSettings.login, testData.testSettings.authenticator);
-            Assert.Pass("Вход пользователя в личный кабинет ФЛ API.");
-        }
-
-
-
-
-        [Test, TestCaseSource(nameof(GetParametrs), new object[] { "FL" })]
-        public void CheckBalanceUserFLAPI(TestDataFL testData, int numberTest)
-        {
-            //Получаем данные пользователя от API
-            ServerResponseUserInfoModel userData = FLController.GetDataUser(FLController.LoginUser(testData.testSettings.login, testData.testSettings.authenticator));
-            //Проверка полученных данных от API на соответсвие тестовых данных в json файле
-            if (testData.testSettings.balance != userData.account.balance.ToString()) { Assert.Fail($"Действие: Проверка на соответсвие баланса пользователя ФЛ от АПИ с тестовыми данными. Результат: Баланс: {testData.testSettings.balance} в тестовых данных не совпадает с полученным от API балансом: {userData.account.balance}"); }
-            Assert.Pass("Проверка на соответсвие баланса пользователя ФЛ от АПИ с тестовыми данными.");
-        }
-
-
-
-
-        [Test, TestCaseSource(nameof(GetParametrs), new object[] { "FL" })]
-        public void CheckIdDeviceFLAPI(TestDataFL testData, int numberTest)
-        {
-            //Получаем данные пользователя от API
-            List<ServerResponseDevicesModel> devices = FLController.GetDevices(FLController.LoginUser(testData.testSettings.login, testData.testSettings.authenticator));
-
-            //Прибор учета с переданным id найден?
-            string foundDeviceId = "";
-            //Список id всех приборов учета через запятую
-            string allDeviceId = "";
-            //Перебираем все приборы учета принадлежащие пользователю
-            foreach (ServerResponseDevicesModel device in devices)
+            //Метод, который возвращает данные из тестового набора (json файла) для ФЛ
+            public static IEnumerable<TestCaseData> GetParametrs()
             {
-                if (device.Id.ToString() == testData.testSettings.deviceId) { foundDeviceId = device.Id.ToString(); }
-                allDeviceId = $"{allDeviceId}, {device.Id}";
+                List<TestDataFL> testDataFL = FLController.GetTestData();
+                //Перебераем в цикле все вложенные элементы в секцию suite
+                foreach (TestDataFL item in testDataFL)
+                {
+                    //Отправляем полученные данные на вход теста
+                    yield return new TestCaseData(item, ++GlobalMethod.numberTest);
+                }
             }
-            //Проверка полученных данных от API на соответсвие тестовых данных в json файле
-            if (foundDeviceId == "") { Assert.Fail($"Действие: Проверка на соответсвие id прибора учета пользователя ФЛ от АПИ с тестовыми данными. Результат: Прибор учета с id: {testData.testSettings.deviceId} в тестовых данных не совпадает с полученным(и) от API id: {allDeviceId}"); }
-            Assert.Pass("Проверка на соответсвие id прибора учета пользователя ФЛ от АПИ с тестовыми данными.");
-        }
 
 
 
 
-        [Test, TestCaseSource(nameof(GetParametrs), new object[] { "FL" })]
-        public void LoginFlFront(TestDataFL testData, int numberTest)
-        {
-            string message = "Действие: Вход пользователя в ЛК ФЛ FRONT. Результат:";
-            IWebDriver _webDriver = new ChromeDriver();
-            //Открываем окно бразуера на весь экран
-            _webDriver.Manage().Window.Maximize();
-            //Переходим на главну. страницу сайта ФЛ
-            _webDriver.Navigate().GoToUrl(MainPageFLPageObject.LocatMainPageFL);
-            //Создаем экземпляр главной страницы сайта ФЛ
-            MainPageFLPageObject mainPageFLPage = new MainPageFLPageObject(_webDriver);
-            //Нажимаем на кнопку личный кабинет
-            mainPageFLPage.ClickButtonPersonalAccount(message);
-            //Выбираем радиобаттон частным лицам
-            mainPageFLPage.ChoiceRadioButtonFL(message);
-            //Выбираем вход по логину и паролю
-            mainPageFLPage.ChoiceRadioButtonMethodLogin(message);
-            //Вводим логин
-            mainPageFLPage.EnterNumberAccount(testData.testSettings.login, message);
-            //Вводим пароль
-            mainPageFLPage.EnterPassword(testData.testSettings.authenticator, message);
-            //Нажимаем на кнопку войти
-            mainPageFLPage.ClickButtonLogin(message);
-            //Уничтожаем вебдрайвер
-            _webDriver.Quit();
-            Assert.Pass("Вход пользователя в ЛК ФЛ FRONT.");
-        }
-
-
-
-
-        [Test, TestCaseSource(nameof(GetParametrs), new object[] { "FL" })]
-        public void LoginTechFlFront(TestDataFL testData, int numberTest)
-        {
-            string message = "Действие: Вход пользователя в ЛК ФЛ FRONT. Результат:";
-            IWebDriver _webDriver = new ChromeDriver();
-            //Открываем окно бразуера на весь экран
-            _webDriver.Manage().Window.Maximize();
-            //Переходим на главну. страницу сайта ФЛ
-            _webDriver.Navigate().GoToUrl(MainPageFLPageObject.LocatMainPageFL);
-            //Создаем экземпляр главной страницы сайта ФЛ
-            MainPageFLPageObject mainPageFLPage = new MainPageFLPageObject(_webDriver);
-            //Нажимаем на кнопку личный кабинет для теходдержки
-            mainPageFLPage.ClickButtonPersonalAccountTech(message);
-            //Вводим логин
-            mainPageFLPage.EnterLoginTech(testData.techLogin, message);
-            //Вводим пароль
-            mainPageFLPage.EnterPasswordTech(testData.techPassword, message);
-            //Нажимаем на кнопку войти
-            mainPageFLPage.ClickButtonLoginTech(message);
-            //Уничтожаем вебдрайвер
-            _webDriver.Quit();
-            Assert.Pass("Вход техподдержки в ЛК ФЛ FRONT.");
-        }
-
-
-
-
-        [Test, TestCaseSource(nameof(GetParametrs), new object[] { "FL" })]
-        public void LoginTechFlAPI(TestDataFL testData, int numberTest)
-        {
-            FLController.LoginUserTech(testData.techLogin, testData.techPassword);
-            Assert.Pass("Вход техподдержки в личный кабинет ФЛ API.");
-        }
-
-
-
-
-        [Test, TestCaseSource(nameof(GetParametrs), new object[] { "FL" })]
-        public void LoginUserFromTechFlAPI(TestDataFL testData, int numberTest)
-        {
-            FLController.LoginUserFromTech(testData.testSettings.login, testData.testSettings.authenticator, FLController.LoginUserTech(testData.techLogin, testData.techPassword));
-            Assert.Pass("Вход пользователя в ЛК ФЛ из под ЛК техподдержки API.");
-        }
-
-
-
-
-        [Test, TestCaseSource(nameof(GetParametrs), new object[] { "FL" })]
-        public void CheckBalanceUserFromTechFLAPI(TestDataFL testData, int numberTest)
-        {
-            //Получаем данные пользователя от API
-            ServerResponseUserInfoModel userData = FLController.GetDataUser(FLController.LoginUserFromTech(testData.testSettings.login, testData.testSettings.authenticator, FLController.LoginUserTech(testData.techLogin, testData.techPassword)));
-            //Проверка полученных данных от API на соответсвие тестовых данных в json файле
-            if (testData.testSettings.balance != userData.account.balance.ToString()) { Assert.Fail($"Действие: Проверка на соответсвие баланса пользователя ФЛ от АПИ с тестовыми данными, авторизированного из под ЛК техподдержки с помощью 'ЛК ФЛ (Служба поддержки)'. Результат: Баланс: {testData.testSettings.balance} в тестовых данных не совпадает с полученным от API балансом: {userData.account.balance}"); }
-            Assert.Pass("Проверка на соответсвие тестовых данных и API данных баланса пользователя ФЛ, авторизированного из под ЛК техподдержки с помощью 'ЛК ФЛ (Служба поддержки)'");
-        }
-
-
-
-
-        [Test, TestCaseSource(nameof(GetParametrs), new object[] { "FL" })]
-        public void CheckIdDeviceFromTechFLAPI(TestDataFL testData, int numberTest)
-        {
-            //Получаем данные пользователя от API
-            List<ServerResponseDevicesModel> devices = FLController.GetDevices(FLController.LoginUserFromTech(testData.testSettings.login, testData.testSettings.authenticator, FLController.LoginUserTech(testData.techLogin, testData.techPassword)));
-
-            //Прибор учета с переданным id найден?
-            string foundDeviceId = "";
-            //Список id всех приборов учета через запятую
-            string allDeviceId = "";
-            //Перебираем все приборы учета принадлежащие пользователю
-            foreach (ServerResponseDevicesModel device in devices)
+            //Метод выполняет тест. Принимает в параметры тестовые данные.
+            [Test, TestCaseSource(nameof(GetParametrs)  )]
+            public void LoginFlAPI(TestDataFL testData, int numberTest)
             {
-                if (device.Id.ToString() == testData.testSettings.deviceId) { foundDeviceId = device.Id.ToString(); }
-                allDeviceId = $"{allDeviceId}, {device.Id}";
+                FLController.LoginUser(testData.testSettings.login, testData.testSettings.password);
+                Assert.Pass("Вход пользователя в личный кабинет ФЛ API.");
             }
-            //Проверка полученных данных от API на соответсвие тестовых данных в json файле
-            if (foundDeviceId == "") { Assert.Fail($"Действие: Проверка на соответсвие id прибора учета пользователя ФЛ от АПИ с тестовыми данными, авторизированного из под ЛК техподдержки с помощью 'ЛК ФЛ (Служба поддержки)'. Результат: Прибор учета с id: {testData.testSettings.deviceId} в тестовых данных не совпадает с полученным(и) от API id: {allDeviceId}"); }
-            Assert.Pass("Проверка на соответсвие тестовых данных и API данных id прибора учета пользователя ФЛ, авторизированного из под ЛК техподдержки с помощью 'ЛК ФЛ (Служба поддержки)'");
+
+
+
+
+            [Test, TestCaseSource(nameof(GetParametrs))]
+            public void CheckBalanceUserFLAPI(TestDataFL testData, int numberTest)
+            {
+                //Получаем данные пользователя от API
+                ServerResponseUserInfoFLModel userData = FLController.GetDataUser(FLController.LoginUser(testData.testSettings.login, testData.testSettings.password));
+                //Проверка полученных данных от API на соответсвие тестовых данных в json файле
+                if (testData.testSettings.balance != userData.account.balance.ToString()) { Assert.Fail($"Действие: Проверка на соответсвие баланса пользователя ФЛ от АПИ с тестовыми данными. Результат: Баланс: {testData.testSettings.balance} в тестовых данных не совпадает с полученным от API балансом: {userData.account.balance}"); }
+                Assert.Pass("Проверка на соответсвие баланса пользователя ФЛ от АПИ с тестовыми данными.");
+            }
+
+
+
+
+            [Test, TestCaseSource(nameof(GetParametrs))]
+            public void CheckIdDeviceFLAPI(TestDataFL testData, int numberTest)
+            {
+                //Получаем данные пользователя от API
+                List<ServerResponseDevicesFLModel> devices = FLController.GetDevices(FLController.LoginUser(testData.testSettings.login, testData.testSettings.password));
+
+                //Прибор учета с переданным id найден?
+                string foundDeviceId = "";
+                //Список id всех приборов учета через запятую
+                string allDeviceId = "";
+                //Перебираем все приборы учета принадлежащие пользователю
+                foreach (ServerResponseDevicesFLModel device in devices)
+                {
+                    if (device.Id.ToString() == testData.testSettings.deviceId) { foundDeviceId = device.Id.ToString(); }
+                    allDeviceId = $"{allDeviceId}, {device.Id}";
+                }
+                //Проверка полученных данных от API на соответсвие тестовых данных в json файле
+                if (foundDeviceId == "") { Assert.Fail($"Действие: Проверка на соответсвие id прибора учета пользователя ФЛ от АПИ с тестовыми данными. Результат: Прибор учета с id: {testData.testSettings.deviceId} в тестовых данных не совпадает с полученным(и) от API id: {allDeviceId}"); }
+                Assert.Pass("Проверка на соответсвие id прибора учета пользователя ФЛ от АПИ с тестовыми данными.");
+            }
+
+
+
+
+            [Test, TestCaseSource(nameof(GetParametrs))]
+            public void LoginFlFront(TestDataFL testData, int numberTest)
+            {
+                string message = "Действие: Вход пользователя в ЛК ФЛ FRONT. Результат:";
+                IWebDriver _webDriver = new ChromeDriver();
+                //Открываем окно бразуера на весь экран
+                _webDriver.Manage().Window.Maximize();
+                //Переходим на главну. страницу сайта ФЛ
+                _webDriver.Navigate().GoToUrl(MainPageFLPageObject.LocatMainPageFL);
+                //Создаем экземпляр главной страницы сайта ФЛ
+                MainPageFLPageObject mainPageFLPage = new MainPageFLPageObject(_webDriver);
+                //Нажимаем на кнопку личный кабинет
+                mainPageFLPage.ClickButtonPersonalAccount(message);
+                //Выбираем радиобаттон частным лицам
+                mainPageFLPage.ChoiceRadioButtonFL(message);
+                //Выбираем вход по логину и паролю
+                mainPageFLPage.ChoiceRadioButtonMethodLogin(message);
+                //Вводим логин
+                mainPageFLPage.EnterNumberAccount(testData.testSettings.login, message);
+                //Вводим пароль
+                mainPageFLPage.EnterPassword(testData.testSettings.password, message);
+                //Нажимаем на кнопку войти
+                mainPageFLPage.ClickButtonLogin(message);
+                //Уничтожаем вебдрайвер
+                _webDriver.Quit();
+                Assert.Pass("Вход пользователя в ЛК ФЛ FRONT.");
+            }
+
+
+
+
+            [Test, TestCaseSource(nameof(GetParametrs))]
+            public void LoginTechFlFront(TestDataFL testData, int numberTest)
+            {
+                string message = "Действие: Вход пользователя в ЛК ФЛ FRONT. Результат:";
+                IWebDriver _webDriver = new ChromeDriver();
+                //Открываем окно бразуера на весь экран
+                _webDriver.Manage().Window.Maximize();
+                //Переходим на главну. страницу сайта ФЛ
+                _webDriver.Navigate().GoToUrl(MainPageFLPageObject.LocatMainPageFL);
+                //Создаем экземпляр главной страницы сайта ФЛ
+                MainPageFLPageObject mainPageFLPage = new MainPageFLPageObject(_webDriver);
+                //Нажимаем на кнопку личный кабинет для теходдержки
+                mainPageFLPage.ClickButtonPersonalAccountTech(message);
+                //Вводим логин
+                mainPageFLPage.EnterLoginTech(testData.techLogin, message);
+                //Вводим пароль
+                mainPageFLPage.EnterPasswordTech(testData.techPassword, message);
+                //Нажимаем на кнопку войти
+                mainPageFLPage.ClickButtonLoginTech(message);
+                //Уничтожаем вебдрайвер
+                _webDriver.Quit();
+                Assert.Pass("Вход техподдержки в ЛК ФЛ FRONT.");
+            }
+
+
+
+
+            [Test, TestCaseSource(nameof(GetParametrs))]
+            public void LoginTechAPI(TestDataFL testData, int numberTest)
+            {
+                FLController.LoginUserTech(testData.techLogin, testData.techPassword);
+                Assert.Pass("Вход техподдержки в личный кабинет ФЛ API.");
+            }
+
+
+
+
+            [Test, TestCaseSource(nameof(GetParametrs))]
+            public void LoginUserFromTechAPI(TestDataFL testData, int numberTest)
+            {
+                FLController.LoginUserFromTech(testData.testSettings.login, testData.testSettings.authenticator, FLController.LoginUserTech(testData.techLogin, testData.techPassword));
+                Assert.Pass("Вход пользователя в ЛК из под ЛК техподдержки API.");
+            }
+
+
+
+
+            [Test, TestCaseSource(nameof(GetParametrs))]
+            public void CheckBalanceUserFromTechFLAPI(TestDataFL testData, int numberTest)
+            {
+                //Получаем данные пользователя от API
+                ServerResponseUserInfoFLModel userData = FLController.GetDataUser(FLController.LoginUserFromTech(testData.testSettings.login, testData.testSettings.authenticator, FLController.LoginUserTech(testData.techLogin, testData.techPassword)));
+                //Проверка полученных данных от API на соответсвие тестовых данных в json файле
+                if (testData.testSettings.balance != userData.account.balance.ToString()) { Assert.Fail($"Действие: Проверка на соответсвие баланса пользователя ФЛ от АПИ с тестовыми данными, авторизированного из под ЛК техподдержки с помощью 'ЛК ФЛ (Служба поддержки)'. Результат: Баланс: {testData.testSettings.balance} в тестовых данных не совпадает с полученным от API балансом: {userData.account.balance}"); }
+                Assert.Pass("Проверка на соответсвие тестовых данных и API данных баланса пользователя ФЛ, авторизированного из под ЛК техподдержки с помощью 'ЛК ФЛ (Служба поддержки)'");
+            }
+
+
+
+
+            [Test, TestCaseSource(nameof(GetParametrs))]
+            public void CheckIdDeviceFromTechFLAPI(TestDataFL testData, int numberTest)
+            {
+                //Получаем данные пользователя от API
+                List<ServerResponseDevicesFLModel> devices = FLController.GetDevices(FLController.LoginUserFromTech(testData.testSettings.login, testData.testSettings.authenticator, FLController.LoginUserTech(testData.techLogin, testData.techPassword)));
+
+                //Прибор учета с переданным id найден?
+                string foundDeviceId = "";
+                //Список id всех приборов учета через запятую
+                string allDeviceId = "";
+                //Перебираем все приборы учета принадлежащие пользователю
+                foreach (ServerResponseDevicesFLModel device in devices)
+                {
+                    if (device.Id.ToString() == testData.testSettings.deviceId) { foundDeviceId = device.Id.ToString(); }
+                    allDeviceId = $"{allDeviceId}, {device.Id}";
+                }
+                //Проверка полученных данных от API на соответсвие тестовых данных в json файле
+                if (foundDeviceId == "") { Assert.Fail($"Действие: Проверка на соответсвие id прибора учета пользователя ФЛ от АПИ с тестовыми данными, авторизированного из под ЛК техподдержки с помощью 'ЛК ФЛ (Служба поддержки)'. Результат: Прибор учета с id: {testData.testSettings.deviceId} в тестовых данных не совпадает с полученным(и) от API id: {allDeviceId}"); }
+                Assert.Pass("Проверка на соответсвие тестовых данных и API данных id прибора учета пользователя ФЛ, авторизированного из под ЛК техподдержки с помощью 'ЛК ФЛ (Служба поддержки)'");
+            }
+        }
+
+
+        [TestFixture]
+        public class UL
+        {
+            //Метод, который возвращает данные из тестового набора (json файла) для ЮЛ
+            public static IEnumerable<TestCaseData> GetParametrs()
+            {
+                List<TestDataUL> testDataUL = ULController.GetTestData();
+                //Перебераем в цикле все вложенные элементы в секцию suite
+                foreach (TestDataUL item in testDataUL)
+                {
+                    //Отправляем полученные данные на вход теста
+                    yield return new TestCaseData(item, ++GlobalMethod.numberTest);
+                }
+            }
+
+
+
+
+            [Test, TestCaseSource(nameof(GetParametrs))]
+            public void CheckBalanceUserFromTechULAPI(TestDataUL testData, int numberTest)
+            {
+                //Получаем данные пользователя от API
+                List<ServerResponseContractInfoULModel> contracts = ULController.GetDataByContract(ULController.LoginUserFromTech(testData.testsettings.login, testData.testsettings.authenticator, ULController.LoginUserTech(testData.techLogin, testData.techPassword)));
+
+                //Договор с переданным балансом найден?
+                string foundContractBalance = "";
+                //Список баланса всех договоров через запятую
+                string allContractBalance = "";
+                //Перебираем все приборы учета принадлежащие пользователю
+                foreach (ServerResponseContractInfoULModel contract in contracts)
+                {
+                    if (contract.balance.ToString() == testData.testsettings.balance) { foundContractBalance = testData.testsettings.balance.ToString(); }
+                    allContractBalance = $"{allContractBalance}, {contract.balance}";
+                }
+
+                //Проверка полученных данных от API на соответсвие тестовых данных в json файле
+                if (foundContractBalance == "") { Assert.Fail($"Действие: Проверка на соответствие баланса договора пользователя ЮЛ от АПИ с тестовыми данными, авторизированного из под ЛК техподдержки с помощью 'ЛК ЮЛ (Служба поддержки)'. Результат: Договор с балансом: {testData.testsettings.balance} в тестовых данных не совпадает с полученным(и) от API балансом(ами): {allContractBalance}"); }
+                Assert.Pass("Проверка на соответствие баланса договора пользователя ЮЛ от АПИ с тестовыми данными, авторизированного из под ЛК техподдержки с помощью 'ЛК ЮЛ (Служба поддержки)'.");
+            }
+
+
+
+
+            [Test, TestCaseSource(nameof(GetParametrs))]
+            public void CheckIdDeviceFromTechULAPI(TestDataUL testData, int numberTest)
+            {
+                //Получаем данные пользователя от API
+                List<ServerResponseDevicesULModel> devices = ULController.GetInfoDevices(testData.testsettings.contractId, ULController.LoginUserFromTech(testData.testsettings.login, testData.testsettings.authenticator, ULController.LoginUserTech(testData.techLogin, testData.techPassword)));
+
+                //Прибор учета с переданным id найден?
+                string foundDeviceId = "";
+                //Список id всех приборов учета через запятую
+                string allDeviceId = "";
+                //Перебираем все приборы учета принадлежащие пользователю
+                foreach (ServerResponseDevicesULModel device in devices)
+                {
+                    if (device.Id.ToString() == testData.testsettings.deviceId) { foundDeviceId = device.Id.ToString(); }
+                    allDeviceId = $"{allDeviceId}, {device.Id}";
+                }
+                //Проверка полученных данных от API на соответсвие тестовых данных в json файле
+                if (foundDeviceId == "") { Assert.Fail($"Действие: Проверка на соответсвие id прибора учета пользователя ЮЛ от АПИ с тестовыми данными, авторизированного из под ЛК техподдержки с помощью 'ЛК ЮЛ (Служба поддержки)'. Результат: Прибор учета с id: {testData.testsettings.deviceId} в тестовых данных не совпадает с полученным(и) от API id: {allDeviceId}"); }
+                Assert.Pass("Проверка на соответсвие тестовых данных и API данных id прибора учета пользователя >K, авторизированного из под ЛК техподдержки с помощью 'ЮЛ (Служба поддержки)'");
+            }
+        }
+
+
+        [TestFixture]
+        public class Common
+        {
+            //Метод, который возвращает данные из тестового набора (json файла)
+            public static IEnumerable<TestCaseData> GetParametrs()
+            {
+                List<TestDataCommon> testDataCommon = CommonController.GetTestData();
+                //Перебераем в цикле все вложенные элементы в секцию suite
+                foreach (TestDataCommon item in testDataCommon)
+                {
+                    //Отправляем полученные данные на вход теста
+                    yield return new TestCaseData(item, GlobalMethod.numberTest);
+                }
+            }
+
+
         }
 
 
@@ -284,6 +351,7 @@ namespace TestIesbk
             rowTable.timeExecution = TestExecutionContext.CurrentContext.Duration.ToString() + " сек."; //Длительность теста
             rowTable.message = TestContext.CurrentContext.Result.Message; //Ошибка теста или описание действия (Если есть)
             GlobalMethod.ListRowTableReport.Add(rowTable);
+            ++GlobalMethod.numberTest;
         }
 
 

@@ -20,6 +20,15 @@ namespace TestApiIesbk {
             return appsetting;
         }
 
+        //Вызов дейсвтий при ошибке теста на проверку фронт части
+        public static void FrontTestFailed(string message, IWebDriver webDriver)
+        {
+            Screenshot screenshot = ((ITakesScreenshot)webDriver).GetScreenshot();
+            screenshot.SaveAsFile($"{GetAppSetting().ScreenshotFailedTest}\\{TestContext.CurrentContext.Test.Arguments[1]!}.jpg");
+            webDriver.Quit();
+            Assert.Fail(message);
+        }
+
         //Проверяет есть ли элемент на странице или нет
         public static bool IsElementExists(By locator, IWebDriver webDriver)
         {

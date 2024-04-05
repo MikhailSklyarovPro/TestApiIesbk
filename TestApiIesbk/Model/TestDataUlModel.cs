@@ -7,36 +7,36 @@ namespace TestIesbk
     {
 
         [JsonPropertyName("url")]
-        public Uri Url { get; set; }
+        public string url { get; set; }
 
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public string type { get; set; }
 
         [JsonPropertyName("tech_login")]
-        public string TechLogin { get; set; }
+        public string techLogin { get; set; }
 
         [JsonPropertyName("tech_password")]
-        public long TechPassword { get; set; }
+        public string techPassword { get; set; }
 
         [JsonPropertyName("testsettings")]
-        public Testsettings Testsettings { get; set; }
+        public Testsettings testsettings { get; set; }
     }
 
     public partial class Testsettings
     {
         [JsonPropertyName("login")]
-        public string Login { get; set; }
+        public string login { get; set; }
 
         [JsonPropertyName("authenticator")]
-        public string Authenticator { get; set; }
+        public string authenticator { get; set; }
 
         [JsonPropertyName("contract_id")]
-        public Guid ContractId { get; set; }
+        public string contractId { get; set; }
 
         [JsonPropertyName("balance")]
-        public string Balance { get; set; }
+        public string balance { get; set; }
 
         [JsonPropertyName("device_id")]
-        public Guid DeviceId { get; set; }
+        public string deviceId { get; set; }
     }
 }

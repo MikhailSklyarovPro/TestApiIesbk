@@ -4,8 +4,11 @@ namespace TestIesbk
 {
     public class AppSettingModel
     {
-        [JsonPropertyName("ApiUrl")]
-        public string ApiUrl { get; set; }
+        [JsonPropertyName("ApiUrlUL")]
+        public string ApiUrlUL { get; set; }
+
+        [JsonPropertyName("ApiUrlFL")]
+        public string ApiUrlFL { get; set; }
 
         [JsonPropertyName("SiteURLFL")]
         public string SiteURLFL { get; set; }
