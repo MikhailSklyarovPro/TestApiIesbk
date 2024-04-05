@@ -1,13 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using System.Text.Json;
+using TestApiIesbk;
 
-namespace TestApiIesbk.Controller
+namespace TestIesbk
 {
     public class CommonController
     {
+
+        //Получение тестовых данных
+        public static List<TestDataCommon> GetTestData()
+        {
+
+            string jsonString = File.ReadAllText(GlobalMethod.GetAppSetting().PathTestDataUL);
+            List<TestDataCommon> testData = JsonSerializer.Deserialize<List<TestDataCommon>>(jsonString)!;
+            return testData;
+        }
+
         //Вход пользователя за техподдержку с логином и паролем
         public void LoginTech()
         {

@@ -1,9 +1,9 @@
 ﻿using System.Text.Json.Serialization;
 
 
-namespace TestApiIesbk.Model
+namespace TestIesbk
 {
-    public class TestDataUlModel
+    public class TestDataUL
     {
 
         [JsonPropertyName("url")]

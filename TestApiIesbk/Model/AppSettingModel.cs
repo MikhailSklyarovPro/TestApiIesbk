@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace TestApiIesbk.Model
+namespace TestIesbk
 {
     public class AppSettingModel
     {
@@ -21,6 +21,15 @@ namespace TestApiIesbk.Model
 
         [JsonPropertyName("ScreenshotFailedTest")]
         public string ScreenshotFailedTest { get; set; }
-        
+
+        [JsonPropertyName("PathTestDataFL")]
+        public string PathTestDataFL { get; set; }
+
+        [JsonPropertyName("PathTestDataUL")]
+        public string PathTestDataUL { get; set; }
+
+        [JsonPropertyName("PathTestDataCommon")]
+        public string PathTestDataCommon { get; set; }
+
     }
 }

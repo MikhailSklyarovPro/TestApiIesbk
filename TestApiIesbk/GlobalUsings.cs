@@ -1,8 +1,9 @@
 global using NUnit.Framework;
 using OpenQA.Selenium;
 using System.Text.Json;
-using TestApiIesbk.Model;
-namespace TestApiIesbk.TestSuite {
+using TestIesbk;
+
+namespace TestApiIesbk {
     public class GlobalMethod
     {
         //Номер выполняемого теста

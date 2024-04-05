@@ -1,8 +1,10 @@
 ﻿{
-  "ApiUrl": "https://api-lkpl-iesbk.dev.enplus.digital/api/",
   "SiteURLFL": "https://sbyt-irkutskenergo.dev.enplus.digital/",
   "SiteURLUL": "https://lkul-iesbk.dev.enplus.digital",
   "SiteURLCommon": "https://sbyt-irkutskenergo.dev.enplus.digital/",
   "PathReportTest": "C:\\Users\\SklyarovMD\\source\\repos\\TestApiIesbk\\TestApiIesbk\\reportTest.html",
-  "ScreenshotFailedTest": "C:\\Users\\SklyarovMD\\source\\repos\\TestApiIesbk\\TestApiIesbk\\ScreenshotFailedTest"
+  "ScreenshotFailedTest": "C:\\Users\\SklyarovMD\\source\\repos\\TestApiIesbk\\TestApiIesbk\\ScreenshotFailedTest",
+  "PathTestDataFL": "C:\\Users\\SklyarovMD\\source\\repos\\TestApiIesbk\\TestApiIesbk\\testdataFl.json",
+  "PathTestDataUL": "C:\\Users\\SklyarovMD\\source\\repos\\TestApiIesbk\\TestApiIesbk\\testdataUl.json",
+  "PathTestDataCommon": "C:\\Users\\SklyarovMD\\source\\repos\\TestApiIesbk\\TestApiIesbk\\testdataCommon.json"
 }

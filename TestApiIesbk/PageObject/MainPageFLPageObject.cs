@@ -1,5 +1,7 @@
 ﻿using OpenQA.Selenium;
-namespace TestApiIesbk.TestSuite
+using TestApiIesbk;
+
+namespace TestIesbk
 {
 
     public class MainPageFLPageObject
@@ -95,48 +97,48 @@ namespace TestApiIesbk.TestSuite
             {
                 Screenshot screenshot = ((ITakesScreenshot)_webDriver).GetScreenshot();
                 screenshot.SaveAsFile($"{GlobalMethod.GetAppSetting().ScreenshotFailedTest}\\{GlobalMethod.numberTest}.jpg");
-                _webDriver.Close(); 
+                _webDriver.Quit(); 
                 Assert.Fail($"{message} Не удалось войти в личный кабинет физического лица"); 
             }
             
         }
 
         //Кликаем на кнопку входа для администраторов
-        public void ClickButtonPersonalAccountTech()
+        public void ClickButtonPersonalAccountTech(string message)
         {
             //Ищем кнопку входа в личный кабинет
-            if (!GlobalMethod.WaitFindElement(_buttonPersonalAccountTech, _webDriver, 5)) { Assert.Fail("Не удалось найти кнопку входа в личный кабинет администратора"); }
+            if (!GlobalMethod.WaitFindElement(_buttonPersonalAccountTech, _webDriver, 5)) { _webDriver.Quit(); Assert.Fail($"{message} Не удалось найти кнопку входа в личный кабинет администратора"); }
             //Нажимаем кнопку входа в личный кабинет
-            if (!GlobalMethod.WaitClick(_webDriver.FindElement(_buttonPersonalAccountTech), 3)) { Assert.Fail("Кнопка входа в личный кабинет администратора не кликабельна"); }
+            if (!GlobalMethod.WaitClick(_webDriver.FindElement(_buttonPersonalAccountTech), 3)) { _webDriver.Quit(); Assert.Fail($"{message} Кнопка входа в личный кабинет администратора не кликабельна"); }
         }
 
-        //Вводаим логин администратора
-        public void EnterLoginTech(string loginTech)
+        //Вводим логин администратора
+        public void EnterLoginTech(string loginTech, string message)
         {
             //Ищем поле для ввода логина администратора
-            if (!GlobalMethod.WaitFindElement(_inputLoginTech, _webDriver, 5)) { Assert.Fail("Не удалось найти поле для ввода логина администратора"); }
+            if (!GlobalMethod.WaitFindElement(_inputLoginTech, _webDriver, 5)) { _webDriver.Quit(); Assert.Fail($"{message} Не удалось найти поле для ввода логина администратора"); }
             //Устанавливаем значение в поле для ввода
-            if (!GlobalMethod.WaitSendKey(_inputLoginTech, _webDriver, loginTech)) { Assert.Fail("Не удалось установить значение в поле для ввода логина администратора"); }
+            if (!GlobalMethod.WaitSendKey(_inputLoginTech, _webDriver, loginTech)) { _webDriver.Quit(); Assert.Fail($"{message} Не удалось установить значение в поле для ввода логина администратора"); }
         }
 
         //Вводим пароль администратора
-        public void EnterPasswordTech(string passwordTech)
+        public void EnterPasswordTech(string passwordTech, string message)
         {
             //Ищем поле для ввода пароля администратора
-            if (!GlobalMethod.WaitFindElement(_inputPasswordTech, _webDriver, 5)) { Assert.Fail("Не удалось найти поле для ввода пароля администратора"); }
+            if (!GlobalMethod.WaitFindElement(_inputPasswordTech, _webDriver, 5)) { _webDriver.Quit(); Assert.Fail($"{message} Не удалось найти поле для ввода пароля администратора"); }
             //Устанавливаем значение в поле для ввода
-            if (!GlobalMethod.WaitSendKey(_inputPasswordTech, _webDriver, passwordTech)) { Assert.Fail("Не удалось установить значение в поле для ввода пароля администратора"); }
+            if (!GlobalMethod.WaitSendKey(_inputPasswordTech, _webDriver, passwordTech)) { _webDriver.Quit(); Assert.Fail($"{message} Не удалось установить значение в поле для ввода пароля администратора"); }
         }
 
         //Нажимаем на кнопку войти
-        public void ClickButtonLoginTech()
+        public void ClickButtonLoginTech(string message)
         {
             //Ищем кнопку войти
-            if (!GlobalMethod.WaitFindElement(_buttonLoginTech, _webDriver, 5)) { Assert.Fail("Не удалось найти кнопку войти"); }
+            if (!GlobalMethod.WaitFindElement(_buttonLoginTech, _webDriver, 5)) { _webDriver.Quit(); Assert.Fail($"{message}Не удалось найти кнопку войти"); }
             //Нажимаем на кнопку
-            if (!GlobalMethod.WaitClick(_webDriver.FindElement(_buttonLoginTech))) { Assert.Fail("Кнопка войти не кликабельна"); }
+            if (!GlobalMethod.WaitClick(_webDriver.FindElement(_buttonLoginTech))) { _webDriver.Quit(); Assert.Fail($"{message}Кнопка войти не кликабельна"); }
             //Ищем боковую панель администратора для того чтобы проверить вошли или нет
-            if (!GlobalMethod.WaitFindElement(_adminPanel, _webDriver, 5)) { Assert.Fail("Не удалось войти в учетную запись администратора"); }
+            if (!GlobalMethod.WaitFindElement(_adminPanel, _webDriver, 5)) { _webDriver.Quit(); Assert.Fail($"{message} Не удалось войти в учетную запись администратора"); }
         }
     }
 }

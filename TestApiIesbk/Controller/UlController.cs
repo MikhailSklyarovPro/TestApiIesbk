@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
+﻿using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
-using TestApiIesbk.Model;
+using TestApiIesbk;
 
-namespace TestApiIesbk.TestSuite
+namespace TestIesbk
 {
-    public class UlController
+    public class ULController
     {
         //Получение тестовых данных
-        public static List<TestDataFL> GetTestData()
+        public static List<TestDataUL> GetTestData()
         {
-            string jsonString = File.ReadAllText("C:\\Users\\SklyarovMD\\source\\repos\\TestApiIesbk\\TestApiIesbk\\testdataUl.json");
-            List<TestDataFL> testData = JsonSerializer.Deserialize<List<TestDataFL>>(jsonString)!;
+
+            string jsonString = File.ReadAllText(GlobalMethod.GetAppSetting().PathTestDataUL);
+            List<TestDataUL> testData = JsonSerializer.Deserialize<List<TestDataUL>>(jsonString)!;
             return testData;
         }
 

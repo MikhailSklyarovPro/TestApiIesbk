@@ -3,71 +3,13 @@ using NUnit.Framework.Internal;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System.Text.Json;
-using TestApiIesbk.Model;
+using TestApiIesbk;
 
-namespace TestApiIesbk.TestSuite
+namespace TestIesbk
 {
     [TestFixture]
     public class TestSuite
     {
-        //Выполняется перед запуском всех тестов
-        [OneTimeSetUp]
-        public void OneTimeSetUp()
-        {
-            string documentPath = GlobalMethod.GetAppSetting().PathReportTest;
-            // Создать экземпляр HTML-документа
-            HtmlDocument document = new HtmlDocument();
-            // Загружаем html документ
-            document.Load(documentPath);
-
-            //Ищем секцию с началом времени тестирования
-            HtmlNode sectionTimeBeginTest = document.DocumentNode.SelectSingleNode("//div[@id='timeBegin']");
-
-            try
-            {
-                // Ищем старое время начала тестирования
-                HtmlNode oldTimeBeginTest = document.DocumentNode.SelectSingleNode("//div[@id='timeBegin']//h1");
-                //Удаляем старое время начала тестирования
-                oldTimeBeginTest.Remove();
-            }
-            catch
-            {
-
-            }
-
-            //Создаем новое время начала тестирования
-            HtmlNode newTimeBeginTest = document.CreateElement("h1");
-
-            //Создаем текст заголовка
-            HtmlNode newValueTimeBeginTest = document.CreateTextNode($"Тестирование началось: {DateTime.Now}:{DateTime.Now.Millisecond}");
-            //Добавляем заголовку новое значение
-            newTimeBeginTest.AppendChild(newValueTimeBeginTest);
-            //Добавляем новый заголовок начала времени тестирования
-            sectionTimeBeginTest.AppendChild(newTimeBeginTest);
-
-            try {
-                // Ищем старое тело таблицы
-                HtmlNode oldTbody = document.DocumentNode.SelectSingleNode("//tbody");
-                // Удаляем старое тело таблицы
-                oldTbody.Remove();
-            }
-            catch {
-                
-            }
-
-            try
-            {
-                //true - если директория не пуста удаляем все ее содержимое
-                Directory.Delete(GlobalMethod.GetAppSetting().ScreenshotFailedTest, true); 
-                Directory.CreateDirectory(GlobalMethod.GetAppSetting().ScreenshotFailedTest);
-            }
-            catch
-            {
-                Directory.CreateDirectory(GlobalMethod.GetAppSetting().ScreenshotFailedTest);
-            }
-            //Сохраняем файл
-            document.Save(documentPath);
-        }
 
         //Метод, который возвращает данные из тестового набора (json файла) для ФЛ
         public static IEnumerable<TestCaseData> GetParametrs(string typeFice)
@@ -76,16 +18,91 @@ namespace TestApiIesbk.TestSuite
             switch (typeFice)
             {
                 case "FL":
+                    List<TestDataFL> testDataFL = FLController.GetTestData();
+                    //Перебераем в цикле все вложенные элементы в секцию suite
+                    foreach (TestDataFL item in testDataFL)
+                    {
+                        //Отправляем полученные данные на вход теста
+                        yield return new TestCaseData(item, ++GlobalMethod.numberTest);
+                    }
                     break;
+
                 case "UL":
+                    List<TestDataUL> testDataUL = ULController.GetTestData();
+                    //Перебераем в цикле все вложенные элементы в секцию suite
+                    foreach (TestDataUL item in testDataUL)
+                    {
+                        //Отправляем полученные данные на вход теста
+                        yield return new TestCaseData(item, ++GlobalMethod.numberTest);
+                    }
+                    break;
+
+                case "Common":
+                    List<TestDataCommon> testDataCommon = CommonController.GetTestData();
+                    //Перебераем в цикле все вложенные элементы в секцию suite
+                    foreach (TestDataCommon item in testDataCommon)
+                    {
+                        //Отправляем полученные данные на вход теста
+                        yield return new TestCaseData(item, ++GlobalMethod.numberTest);
+                    }
                     break;
             }
-            List<TestDataFL> testData = FLController.GetTestData();
-            //Перебераем в цикле все вложенные элементы в секцию suite
-            foreach (TestDataFL item in testData)
+        }
+
+
+
+
+        //Выполняется перед запуском всех тестов
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
+        {
+            string documentPath = GlobalMethod.GetAppSetting().PathReportTest;
+            try
             {
-                //Отправляем полученные данные на вход теста
-                yield return new TestCaseData(item, ++GlobalMethod.numberTest);
+                // Создать экземпляр HTML-документа
+                HtmlDocument document = new HtmlDocument();
+                // Загружаем html документ
+                document.Load(documentPath);
+
+                //Ищем секцию с началом времени тестирования
+                HtmlNode sectionTimeBeginTest = document.DocumentNode.SelectSingleNode("//div[@id='timeBegin']");
+
+                // Ищем старое время начала тестирования
+                HtmlNode oldTimeBeginTest = document.DocumentNode.SelectSingleNode("//div[@id='timeBegin']//h1");
+                if (oldTimeBeginTest != null)
+                {
+                    //Удаляем старое время начала тестирования
+                    oldTimeBeginTest.Remove();
+                }
+ 
+                //Создаем новое время начала тестирования
+                HtmlNode newTimeBeginTest = document.CreateElement("h1");
+
+                //Создаем текст заголовка
+                HtmlNode newValueTimeBeginTest = document.CreateTextNode($"Тестирование началось: {DateTime.Now}:{DateTime.Now.Millisecond}");
+                //Добавляем заголовку новое значение
+                newTimeBeginTest.AppendChild(newValueTimeBeginTest);
+                //Добавляем новый заголовок начала времени тестирования
+                sectionTimeBeginTest.AppendChild(newTimeBeginTest);
+
+                // Ищем старое тело таблицы
+                HtmlNode oldTbody = document.DocumentNode.SelectSingleNode("//tbody");
+                if (oldTbody != null) 
+                {
+                    // Удаляем старое тело таблицы
+                    oldTbody.Remove();
+                }
+
+                //true - если директория не пуста удаляем все ее содержимое
+                Directory.Delete(GlobalMethod.GetAppSetting().ScreenshotFailedTest, true);
+                Directory.CreateDirectory(GlobalMethod.GetAppSetting().ScreenshotFailedTest);
+
+                //Сохраняем файл
+                document.Save(documentPath);
+            }
+            catch (Exception exception)
+            {
+                Assert.Fail(exception.Message);
             }
         }
 
@@ -172,6 +189,33 @@ namespace TestApiIesbk.TestSuite
 
 
         [Test, TestCaseSource(nameof(GetParametrs), new object[] { "FL" })]
+        public void LoginTechFlFront(TestDataFL testData, int numberTest)
+        {
+            string message = "Действие: Вход пользователя в ЛК ФЛ FRONT. Результат:";
+            IWebDriver _webDriver = new ChromeDriver();
+            //Открываем окно бразуера на весь экран
+            _webDriver.Manage().Window.Maximize();
+            //Переходим на главну. страницу сайта ФЛ
+            _webDriver.Navigate().GoToUrl(MainPageFLPageObject.LocatMainPageFL);
+            //Создаем экземпляр главной страницы сайта ФЛ
+            MainPageFLPageObject mainPageFLPage = new MainPageFLPageObject(_webDriver);
+            //Нажимаем на кнопку личный кабинет для теходдержки
+            mainPageFLPage.ClickButtonPersonalAccountTech(message);
+            //Вводим логин
+            mainPageFLPage.EnterLoginTech(testData.techLogin, message);
+            //Вводим пароль
+            mainPageFLPage.EnterPasswordTech(testData.techPassword, message);
+            //Нажимаем на кнопку войти
+            mainPageFLPage.ClickButtonLoginTech(message);
+            //Уничтожаем вебдрайвер
+            _webDriver.Quit();
+            Assert.Pass("Вход техподдержки в ЛК ФЛ FRONT.");
+        }
+
+
+
+
+        [Test, TestCaseSource(nameof(GetParametrs), new object[] { "FL" })]
         public void LoginTechFlAPI(TestDataFL testData, int numberTest)
         {
             FLController.LoginUserTech(testData.techLogin, testData.techPassword);
@@ -187,6 +231,7 @@ namespace TestApiIesbk.TestSuite
             FLController.LoginUserFromTech(testData.testSettings.login, testData.testSettings.authenticator, FLController.LoginUserTech(testData.techLogin, testData.techPassword));
             Assert.Pass("Вход пользователя в ЛК ФЛ из под ЛК техподдержки API.");
         }
+
 
 
 
@@ -241,6 +286,8 @@ namespace TestApiIesbk.TestSuite
             GlobalMethod.ListRowTableReport.Add(rowTable);
         }
 
+
+
         //Выполняется после выполнения всех тестов
         [OneTimeTearDown]
         public void OneTimeTearDown()
@@ -257,7 +304,7 @@ namespace TestApiIesbk.TestSuite
             {
                 // Создаем строку таблицы
                 HtmlNode newRow = document.CreateElement("tr");
-                if (rowTableReport.result == "Passed"){ newRow.SetAttributeValue("style", "color:green;"); }
+                if (rowTableReport.result == "Passed") { newRow.SetAttributeValue("style", "color:green;"); }
                 if (rowTableReport.result == "Failed") { newRow.SetAttributeValue("style", "color:red; font-weight: bold;"); }
                 //TODO:Проверить правильное название Ignore
                 if (rowTableReport.result == "Ignore") { newRow.SetAttributeValue("style", "color:yellow;"); }

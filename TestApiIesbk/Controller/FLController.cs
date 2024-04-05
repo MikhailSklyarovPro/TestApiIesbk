@@ -1,9 +1,9 @@
 ﻿using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
-using TestApiIesbk.Model;
+using TestApiIesbk;
 
-namespace TestApiIesbk.TestSuite
+namespace TestIesbk
 {
     public class FLController
     {
@@ -11,7 +11,7 @@ namespace TestApiIesbk.TestSuite
         public static List<TestDataFL> GetTestData()
         {
 
-            string jsonString = File.ReadAllText("C:\\Users\\SklyarovMD\\source\\repos\\TestApiIesbk\\TestApiIesbk\\testdataFl.json");
+            string jsonString = File.ReadAllText(GlobalMethod.GetAppSetting().PathTestDataFL);
             List<TestDataFL> testData = JsonSerializer.Deserialize<List<TestDataFL>>(jsonString)!;
             return testData;
         }
@@ -172,15 +172,12 @@ namespace TestApiIesbk.TestSuite
         //Получаем все приборы учета пользователя по токену авторизации
         public static List<ServerResponseDevicesModel> GetDevices(string token)
         {
-            //Получаем настройки приложения
-            string jsonString = File.ReadAllText(@"C:\Users\SklyarovMD\source\repos\TestApiIesbk\TestApiIesbk\appsetting.json");
-            AppSettingModel setting = JsonSerializer.Deserialize<AppSettingModel>(jsonString)!;
             //Полученные данные
             List<ServerResponseDevicesModel> devices = new List<ServerResponseDevicesModel>();
             //Параметры запроса(метод апи)
             string urlParametrs = "account/devices";
             //Основной путь  
-            string URL = setting.ApiUrl;
+            string URL = GlobalMethod.GetAppSetting().ApiUrl;
             //Создаем экземпляр класса для отправки запросов к веб-ресурсам
             HttpClient client = new HttpClient();
             //Задаем базовый путь до веб-ресурса

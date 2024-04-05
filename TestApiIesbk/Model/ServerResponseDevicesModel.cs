@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace TestApiIesbk.Model
+namespace TestIesbk
 {
     public class ServerResponseDevicesModel
     {
