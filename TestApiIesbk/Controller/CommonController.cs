@@ -8,10 +8,12 @@ namespace TestApiIesbk.Controller
     public class CommonController
     {
 
-        //Получение тестовых данных
+        //Получение общих тестовых данных
         public static List<TestDataCommon> GetTestData()
         {
+            //Читаем из json
             string jsonString = File.ReadAllText(GlobalMethod.GetAppSetting().PathTestDataCommon);
+            //Десериализуем в модель
             List<TestDataCommon> testData = JsonSerializer.Deserialize<List<TestDataCommon>>(jsonString)!;
             return testData;
         }
@@ -54,7 +56,7 @@ namespace TestApiIesbk.Controller
             }
             else
             {
-                //Ожидаем пока не получим значение. После получения читаем ответ как строку (в итоге будет json в виде строки)
+                //Записывает ответ в виде json
                 string jsonResult = response.Content.ReadAsStringAsync().Result;
                 //Записываем ответ от сервера в модель 
                 ServerResponseErrorModel errorModel = JsonSerializer.Deserialize<ServerResponseErrorModel>(jsonResult)!;
@@ -109,7 +111,7 @@ namespace TestApiIesbk.Controller
 
 
         //Отправка тестового sms на телефон
-        public static void CheckSendTestSms(string tokenTech, string phone)
+        public static void SendTestSms(string tokenTech, string phone)
         {
             //Параметры запроса(метод апи)
             string urlParametrs = "service/tech/check/sms";
@@ -139,7 +141,7 @@ namespace TestApiIesbk.Controller
             //Делаем проверку если ответ пришел усешный 200-300
             if (!response.IsSuccessStatusCode)
             {
-                //Ожидаем пока не получим значение. После получения читаем ответ как строку (в итоге будет json в виде строки)
+                //Записываем ответ в виде json
                 string jsonResult = response.Content.ReadAsStringAsync().Result;
                 //Записываем ответ от сервера в модель 
                 ServerResponseErrorModel errorModel = JsonSerializer.Deserialize<ServerResponseErrorModel>(jsonResult)!;

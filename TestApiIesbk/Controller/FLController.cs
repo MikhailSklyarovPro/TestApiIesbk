@@ -8,7 +8,7 @@ namespace TestApiIesbk.Controller
 {
     public class FLController
     {
-        //Получение тестовых данных
+        //Получение тестовых данных ФЛ
         public static List<TestDataFL> GetTestData()
         {
 
@@ -55,7 +55,7 @@ namespace TestApiIesbk.Controller
             }
             else
             {
-                //Ожидаем пока не получим значение. После получения читаем ответ как строку (в итоге будет json в виде строки)
+                //Записывает ответ в виде json
                 string jsonResult = response.Content.ReadAsStringAsync().Result;
                 //Записываем ответ от сервера в модель 
                 ServerResponseErrorModel errorModel = JsonSerializer.Deserialize<ServerResponseErrorModel>(jsonResult)!;
@@ -105,7 +105,7 @@ namespace TestApiIesbk.Controller
             }
             else
             {
-                //Ожидаем пока не получим значение. После получения читаем ответ как строку (в итоге будет json в виде строки)
+                //Записываем ответ в виде json
                 string jsonResult = response.Content.ReadAsStringAsync().Result;
                 //Записываем ответ от сервера в модель 
                 ServerResponseErrorModel errorModel = JsonSerializer.Deserialize<ServerResponseErrorModel>(jsonResult)!;
@@ -158,7 +158,7 @@ namespace TestApiIesbk.Controller
             }
             else
             {
-                //Ожидаем пока не получим значение. После получения читаем ответ как строку (в итоге будет json в виде строки)
+                //Записываем ответ в виде json
                 string jsonResult = response.Content.ReadAsStringAsync().Result;
                 //Записываем ответ от сервера в модель 
                 ServerResponseErrorModel errorModel = JsonSerializer.Deserialize<ServerResponseErrorModel>(jsonResult)!;
@@ -201,7 +201,7 @@ namespace TestApiIesbk.Controller
             }
             else
             {
-                //Ожидаем пока не получим значение. После получения читаем ответ как строку (в итоге будет json в виде строки)
+                //Записывает ответ в виде json
                 string jsonResult = response.Content.ReadAsStringAsync().Result;
                 //Записываем ответ от сервера в модель 
                 ServerResponseErrorModel errorModel = JsonSerializer.Deserialize<ServerResponseErrorModel>(jsonResult)!;
@@ -242,7 +242,7 @@ namespace TestApiIesbk.Controller
             }
             else
             {
-                //Ожидаем пока не получим значение. После получения читаем ответ как строку (в итоге будет json в виде строки)
+                //Записываем ответ в виде json
                 string jsonResult = response.Content.ReadAsStringAsync().Result;
                 //Записываем ответ от сервера в модель 
                 ServerResponseErrorModel errorModel = JsonSerializer.Deserialize<ServerResponseErrorModel>(jsonResult)!;

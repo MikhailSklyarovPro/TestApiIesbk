@@ -8,7 +8,7 @@ namespace TestApiIesbk.Controller
 {
     public class ULController
     {
-        //Получение тестовых данных
+        //Получение тестовых данных ЮЛ
         public static List<TestDataUL> GetTestData()
         {
 
@@ -55,7 +55,7 @@ namespace TestApiIesbk.Controller
             }
             else
             {
-                //Ожидаем пока не получим значение. После получения читаем ответ как строку (в итоге будет json в виде строки)
+                //Записываем ответ в виде json
                 string jsonResult = response.Content.ReadAsStringAsync().Result;
                 //Записываем ответ от сервера в модель 
                 ServerResponseErrorModel errorModel = JsonSerializer.Deserialize<ServerResponseErrorModel>(jsonResult)!;
@@ -108,7 +108,7 @@ namespace TestApiIesbk.Controller
             }
             else
             {
-                //Ожидаем пока не получим значение. После получения читаем ответ как строку (в итоге будет json в виде строки)
+                //Записываем ответ в виде json
                 string jsonResult = response.Content.ReadAsStringAsync().Result;
                 //Записываем ответ от сервера в модель 
                 ServerResponseErrorModel errorModel = JsonSerializer.Deserialize<ServerResponseErrorModel>(jsonResult)!;
@@ -151,7 +151,7 @@ namespace TestApiIesbk.Controller
             }
             else
             {
-                //Ожидаем пока не получим значение. После получения читаем ответ как строку (в итоге будет json в виде строки)
+                //Записывает ответ в виде json
                 string jsonResult = response.Content.ReadAsStringAsync().Result;
                 //Записываем ответ от сервера в модель 
                 ServerResponseErrorModel errorModel = JsonSerializer.Deserialize<ServerResponseErrorModel>(jsonResult)!;
@@ -194,7 +194,7 @@ namespace TestApiIesbk.Controller
             }
             else
             {
-                //Ожидаем пока не получим значение. После получения читаем ответ как строку (в итоге будет json в виде строки)
+                //Записывает ответ в виде json
                 string jsonResult = response.Content.ReadAsStringAsync().Result;
                 //Записываем ответ от сервера в модель 
                 ServerResponseErrorModel errorModel = JsonSerializer.Deserialize<ServerResponseErrorModel>(jsonResult)!;

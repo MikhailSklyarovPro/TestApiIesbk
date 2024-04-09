@@ -506,7 +506,7 @@ namespace TestApiIesbk.TestIesbk
         [Test, TestCaseSource(nameof(GetParametrs))]
         public void CheckSendTestSmsAPI(TestDataCommon allData, int numberTest)
         {
-            CommonController.CheckSendTestSms(CommonController.LoginCommonTech(allData.techLogin, allData.techPassword), allData.testsettings.phone);
+            CommonController.SendTestSms(CommonController.LoginCommonTech(allData.techLogin, allData.techPassword), allData.testsettings.phone);
             Assert.Pass($"Общая отправка тестового sms на телефон:{allData.testsettings.email}");
         }
     }
