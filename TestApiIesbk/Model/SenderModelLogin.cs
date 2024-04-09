@@ -1,6 +1,6 @@
 ﻿
 
-namespace TestIesbk
+namespace TestApiIesbk.Model
 {
     public class SenderModelLogin
     {

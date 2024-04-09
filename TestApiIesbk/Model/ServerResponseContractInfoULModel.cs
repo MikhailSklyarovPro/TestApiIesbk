@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 
 
-namespace TestApiIesbk.UL
+namespace TestApiIesbk.Model
 {
     public class ServerResponseContractInfoULModel
     {

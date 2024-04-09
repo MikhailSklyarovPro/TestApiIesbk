@@ -1,5 +1,5 @@
 ﻿
-namespace TestIesbk
+namespace TestApiIesbk.Model
 {
     public class SenderModelLoginTech
     {

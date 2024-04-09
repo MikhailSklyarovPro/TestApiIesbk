@@ -1,5 +1,5 @@
 ﻿
-namespace TestIesbk.FL
+namespace TestApiIesbk.Model
 {
     public class ServerResponseUserInfoFLModel
     {

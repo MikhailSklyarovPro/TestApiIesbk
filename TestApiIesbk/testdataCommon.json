@@ -2,21 +2,31 @@
   {
     "url": "https://api.enplus.ru/v2/webapifl/sbyt/api",
     "type": "common",
-    "tech_login": "testuser",
+    "tech_login": "Misha",
     "tech_password": "111111111",
     "testsettings": {
-      "email": "test@test.com",
-      "phone": "796400000000"
+      "email": "mikhail.sklyarov.01@bk.ru",
+      "phone": "89247545280"
     }
   },
   {
     "url": "https://api.enplus.ru/v2/webapifl/sbyt/api",
     "type": "common",
-    "tech_login": "testuser",
+    "tech_login": "Oleg",
     "tech_password": "111111111",
     "testsettings": {
-      "email": "test@test.com",
-      "phone": "796400000000"
+      "email": "mikhail.sklyarov.01@bk.ru",
+      "phone": "89247545280"
+    }
+  },
+  {
+    "url": "https://api.enplus.ru/v2/webapifl/sbyt/api",
+    "type": "common",
+    "tech_login": "Petyia",
+    "tech_password": "111111111",
+    "testsettings": {
+      "email": "mikhail.sklyarov.01@bk.ru",
+      "phone": "89247545280"
     }
   }
 ]

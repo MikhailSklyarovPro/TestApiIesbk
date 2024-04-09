@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 
 
-namespace TestIesbk
+namespace TestApiIesbk.Model.UL
 {
     public class TestDataUL
     {

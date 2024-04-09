@@ -1,116 +1,116 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace TestIesbk.FL
+namespace TestApiIesbk.Model.FL
 {
     public class ServerResponseDevicesFLModel
     {
         [JsonPropertyName("last_reading")]
-        public LastReading LastReading { get; set; }
+        public LastReading lastReading { get; set; }
 
         [JsonPropertyName("id")]
-        public Guid Id { get; set; }
+        public Guid id { get; set; }
 
         [JsonPropertyName("number")]
-        public string Number { get; set; }
+        public string number { get; set; }
 
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public string type { get; set; }
 
         [JsonPropertyName("scales")]
-        public List<Scale> Scales { get; set; }
+        public List<Scale> scales { get; set; }
 
         [JsonPropertyName("trans_factor")]
-        public double TransFactor { get; set; }
+        public double transFactor { get; set; }
 
         [JsonPropertyName("accuracy")]
-        public string Accuracy { get; set; }
+        public string accuracy { get; set; }
 
         [JsonPropertyName("phases")]
-        public long Phases { get; set; }
+        public long phases { get; set; }
 
         [JsonPropertyName("installed")]
-        public DateTimeOffset Installed { get; set; }
+        public DateTimeOffset installed { get; set; }
 
         [JsonPropertyName("installed_string")]
-        public string InstalledString { get; set; }
+        public string installedString { get; set; }
 
         [JsonPropertyName("checked")]
-        public DateTimeOffset Checked { get; set; }
+        public DateTimeOffset checkedValue { get; set; }
 
         [JsonPropertyName("checked_string")]
-        public string CheckedString { get; set; }
+        public string checkedString { get; set; }
 
         [JsonPropertyName("next_check")]
-        public DateTimeOffset NextCheck { get; set; }
+        public DateTimeOffset nextCheck { get; set; }
 
         [JsonPropertyName("next_check_string")]
-        public string NextCheckString { get; set; }
+        public string nextCheckString { get; set; }
 
         [JsonPropertyName("service_code")]
-        public long ServiceCode { get; set; }
+        public long serviceCode { get; set; }
 
         [JsonPropertyName("service_name")]
-        public string ServiceName { get; set; }
+        public string serviceName { get; set; }
 
         [JsonPropertyName("parent_name")]
-        public string ParentName { get; set; }
+        public string parentName { get; set; }
 
         [JsonPropertyName("service_alias_id")]
-        public Guid ServiceAliasId { get; set; }
+        public Guid serviceAliasId { get; set; }
 
         [JsonPropertyName("installation_place")]
-        public string InstallationPlace { get; set; }
+        public string installationPlace { get; set; }
 
         [JsonPropertyName("guid_position")]
-        public Guid GuidPosition { get; set; }
+        public Guid guidPosition { get; set; }
 
         [JsonPropertyName("owners")]
-        public List<Owner> Owners { get; set; }
+        public List<Owner> owners { get; set; }
 
         [JsonPropertyName("is_smart")]
-        public bool IsSmart { get; set; }
+        public bool isSmart { get; set; }
 
         [JsonPropertyName("status")]
-        public string Status { get; set; }
+        public string status { get; set; }
 
         [JsonPropertyName("accepts_readings")]
-        public bool AcceptsReadings { get; set; }
+        public bool acceptsReadings { get; set; }
 
         [JsonPropertyName("is_interval")]
-        public bool IsInterval { get; set; }
+        public bool isInterval { get; set; }
 
         [JsonPropertyName("energy_kind")]
-        public string EnergyKind { get; set; }
+        public string energyKind { get; set; }
 
         [JsonPropertyName("address")]
-        public string Address { get; set; }
+        public string address { get; set; }
 
         [JsonPropertyName("is_complex")]
-        public bool IsComplex { get; set; }
+        public bool isComplex { get; set; }
 
         [JsonPropertyName("readings_accept_type")]
-        public string ReadingsAcceptType { get; set; }
+        public string readingsAcceptType { get; set; }
 
         [JsonPropertyName("readings_accept_type_text")]
-        public string ReadingsAcceptTypeText { get; set; }
+        public string readingsAcceptTypeText { get; set; }
 
         [JsonPropertyName("is_hot_water")]
-        public bool IsHotWater { get; set; }
+        public bool isHotWater { get; set; }
 
         [JsonPropertyName("is_installed")]
-        public bool IsInstalled { get; set; }
+        public bool isInstalled { get; set; }
 
         [JsonPropertyName("is_permitted")]
-        public bool IsPermitted { get; set; }
+        public bool isPermitted { get; set; }
 
         [JsonPropertyName("admission_status")]
-        public object AdmissionStatus { get; set; }
+        public object admissionStatus { get; set; }
 
         [JsonPropertyName("allow_vodomer")]
-        public bool AllowVodomer { get; set; }
+        public bool allowVodomer { get; set; }
 
         [JsonPropertyName("show_electric_info")]
-        public bool ShowElectricInfo { get; set; }
+        public bool showElectricInfo { get; set; }
     }
 
         public partial class LastReading
@@ -134,34 +134,34 @@ namespace TestIesbk.FL
         public partial class ReadingSlot
         {
             [JsonPropertyName("elements")]
-            public List<Element> Elements { get; set; }
+            public List<Element> elements { get; set; }
         }
 
         public partial class Element
         {
             [JsonPropertyName("scale_id")]
-            public Guid ScaleId { get; set; }
+            public Guid scaleId { get; set; }
 
             [JsonPropertyName("only_consumption")]
-            public bool OnlyConsumption { get; set; }
+            public bool onlyConsumption { get; set; }
 
             [JsonPropertyName("max_value")]
-            public int MaxValue { get; set; }
+            public int maxValue { get; set; }
 
             [JsonPropertyName("trans_factor")]
-            public double TransFactor { get; set; }
+            public double transFactor { get; set; }
 
             [JsonPropertyName("before_point")]
-            public int BeforePoint { get; set; }
+            public int beforePoint { get; set; }
 
             [JsonPropertyName("after_point")]
-            public int AfterPoint { get; set; }
+            public int afterPoint { get; set; }
 
             [JsonPropertyName("unit")]
-            public string Unit { get; set; }
+            public string unit { get; set; }
 
             [JsonPropertyName("last_reading")]
-            public double LastReading { get; set; }
+            public double lastReading { get; set; }
         }
 
         public partial class Reading

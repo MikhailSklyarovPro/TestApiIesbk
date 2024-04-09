@@ -1,5 +1,5 @@
 ﻿
-namespace TestApiIesbk.UL
+namespace TestApiIesbk.Model
 {
     public class SenderModelLoginUL
     {

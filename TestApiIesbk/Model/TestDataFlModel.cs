@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 
 
-namespace TestIesbk
+namespace TestApiIesbk.Model.FL
 {
     public class TestDataFL
     {
@@ -21,7 +21,7 @@ namespace TestIesbk
         public Testsettings testSettings { get; set; }
 
 
-        public class Testsettings
+        public partial class Testsettings
         {
             [JsonPropertyName("login")]
             public string login { get; set; }

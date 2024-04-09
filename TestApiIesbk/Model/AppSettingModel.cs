@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace TestIesbk
+namespace TestApiIesbk.Model
 {
     public class AppSettingModel
     {

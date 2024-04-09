@@ -1,9 +1,10 @@
 ﻿using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
-using TestApiIesbk;
+using TestApiIesbk.Model;
+using TestApiIesbk.Model.FL;
 
-namespace TestIesbk.FL
+namespace TestApiIesbk.Controller
 {
     public class FLController
     {

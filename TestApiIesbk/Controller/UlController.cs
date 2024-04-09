@@ -1,11 +1,10 @@
 ﻿using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
-using TestApiIesbk;
-using TestApiIesbk.UL;
-using TestIesbk.FL;
+using TestApiIesbk.Model;
+using TestApiIesbk.Model.UL;
 
-namespace TestIesbk.UL
+namespace TestApiIesbk.Controller
 {
     public class ULController
     {

@@ -1,7 +1,7 @@
 global using NUnit.Framework;
 using OpenQA.Selenium;
 using System.Text.Json;
-using TestIesbk;
+using TestApiIesbk.Model;
 
 namespace TestApiIesbk {
     public class GlobalMethod
