@@ -24,7 +24,7 @@ namespace TestApiIesbk {
         public static void FrontTestFailed(string message, IWebDriver webDriver)
         {
             Screenshot screenshot = ((ITakesScreenshot)webDriver).GetScreenshot();
-            screenshot.SaveAsFile($"{GetAppSetting().ScreenshotFailedTest}\\{TestContext.CurrentContext.Test.Arguments[1]!}.jpg");
+            screenshot.SaveAsFile($"{GetAppSetting().screenshotFailedTest}\\{TestContext.CurrentContext.Test.Arguments[1]!}.jpg");
             webDriver.Quit();
             Assert.Fail(message);
         }

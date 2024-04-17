@@ -1,19 +1,7 @@
 [
   {
-    "url": "https://api.enplus.ru/v2/webapifl/sbyt/api",
-    "type": "fl",
-    "tech_login": "Misha",
-    "tech_password": "111111111",
-    "testsettings": {
-      "login": "10103005224",
-      "password": "111111111",
-      "authenticator": "Бухарова",
-      "balance": "123",
-      "device_id": "60909dbb-57c5-11e7-80d4-002481f90c3a"
-    }
-  },
-  {
-    "url": "https://api.enplus.ru/v2/webapifl/sbyt/api",
+    "urlApi": "https://api-lkpl-iesbk.dev.enplus.digital/api/",
+    "urlSite": "https://sbyt-irkutskenergo.dev.enplus.digital/",
     "type": "fl",
     "tech_login": "Misha",
     "tech_password": "111111111",
@@ -22,20 +10,7 @@
       "password": "111111111",
       "authenticator": "Бухарова",
       "balance": "12663,44",
-      "device_id": "60909dbb-34-11e7-80d4-002481f90c3a"
-    }
-  },
-  {
-    "url": "https://api.enplus.ru/v2/webapifl/sbyt/api",
-    "type": "fl",
-    "tech_login": "Oleg",
-    "tech_password": "111111111",
-    "testsettings": {
-      "login": "1234",
-      "password": "111111111",
-      "authenticator": "Бухарова",
-      "balance": "6767656",
-      "device_id": "c69aa35f-67a2-11e2-b371-001f29ceb8714"
+      "device_id": "60909dbb-57c5-11e7-80d4-002481f90c3a"
     }
   }
 ]

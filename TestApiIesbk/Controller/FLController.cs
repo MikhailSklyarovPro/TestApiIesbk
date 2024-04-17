@@ -12,19 +12,19 @@ namespace TestApiIesbk.Controller
         public static List<TestDataFL> GetTestData()
         {
 
-            string jsonString = File.ReadAllText(GlobalMethod.GetAppSetting().PathTestDataFL);
+            string jsonString = File.ReadAllText(GlobalMethod.GetAppSetting().pathTestDataFL);
             List<TestDataFL> testData = JsonSerializer.Deserialize<List<TestDataFL>>(jsonString)!;
             return testData;
         }
 
         //Вход пользователя и получение токена авторизации
-        public static string LoginUser(string login, string password)
+        public static string LoginUser(string baseUrl, string login, string password)
         {
             //Параметры запроса(метод апи)
             string urlParametrs = "auth/login";
 
             //Основной путь  
-            string URL = GlobalMethod.GetAppSetting().ApiUrlFL + urlParametrs;
+            string URL = baseUrl + urlParametrs;
             //Создаем экземпляр класса для отправки запросов к веб-ресурсам
             HttpClient client = new HttpClient();
             //Задаем базовый путь до веб-ресурса
@@ -68,13 +68,13 @@ namespace TestApiIesbk.Controller
         }
 
         //Вход техподдержки и получение токена авторизации
-        public static string LoginUserTech(string login, string password)
+        public static string LoginUserTech(string baseUrl, string login, string password)
         {
             //Параметры запроса(метод апи)
             string urlParametrs = "service/tech/auth/login";
 
             //Основной путь  
-            string URL = GlobalMethod.GetAppSetting().ApiUrlFL + urlParametrs;
+            string URL = baseUrl + urlParametrs;
             //Создаем экземпляр класса для отправки запросов к веб-ресурсам
             HttpClient client = new HttpClient();
             //Задаем базовый путь до веб-ресурса
@@ -118,13 +118,13 @@ namespace TestApiIesbk.Controller
         }
 
         //Вход пользователя из под ЛК техподдержки и получение токена авторизации
-        public static string LoginUserFromTech(string login, string password, string tokenTech)
+        public static string LoginUserFromTech(string baseUrl, string login, string password, string tokenTech)
         {
             //Параметры запроса(метод апи)
             string urlParametrs = "auth/login_tech";
 
             //Основной путь  
-            string URL = GlobalMethod.GetAppSetting().ApiUrlFL + urlParametrs;
+            string URL = baseUrl + urlParametrs;
             //Создаем экземпляр класса для отправки запросов к веб-ресурсам
             HttpClient client = new HttpClient();
             //Задаем базовый путь до веб-ресурса
@@ -171,14 +171,14 @@ namespace TestApiIesbk.Controller
         }
 
         //Получаем все приборы учета пользователя по токену авторизации
-        public static List<ServerResponseDevicesFLModel> GetDevices(string token)
+        public static List<ServerResponseDevicesFLModel> GetDevices(string baseUrl, string token)
         {
             //Полученные данные
             List<ServerResponseDevicesFLModel> devices = new List<ServerResponseDevicesFLModel>();
             //Параметры запроса(метод апи)
             string urlParametrs = "account/devices";
             //Основной путь  
-            string URL = GlobalMethod.GetAppSetting().ApiUrlFL;
+            string URL = baseUrl;
             //Создаем экземпляр класса для отправки запросов к веб-ресурсам
             HttpClient client = new HttpClient();
             //Задаем базовый путь до веб-ресурса
@@ -213,14 +213,14 @@ namespace TestApiIesbk.Controller
         }
 
         //Получение данных пользователя
-        public static ServerResponseUserInfoFLModel GetDataUser(string token)
+        public static ServerResponseUserInfoFLModel GetDataUser(string baseUrl, string token)
         {
             //Полученные данные
             ServerResponseUserInfoFLModel userInfo = new ServerResponseUserInfoFLModel();
             //Параметры запроса(метод апи)
             string urlParametrs = "user/info";
             //Основной путь  
-            string URL = GlobalMethod.GetAppSetting().ApiUrlFL;
+            string URL = baseUrl;
             //Создаем экземпляр класса для отправки запросов к веб-ресурсам
             HttpClient client = new HttpClient();
             //Задаем базовый путь до веб-ресурса

@@ -4,35 +4,42 @@ namespace TestApiIesbk.Model
 {
     public class AppSettingModel
     {
-        [JsonPropertyName("ApiUrlUL")]
-        public string ApiUrlUL { get; set; }
+        [JsonPropertyName("pathReportTest")]
+        public string pathReportTest { get; set; }
 
-        [JsonPropertyName("ApiUrlFL")]
-        public string ApiUrlFL { get; set; }
+        [JsonPropertyName("screenshotFailedTest")]
+        public string screenshotFailedTest { get; set; }
 
-        [JsonPropertyName("SiteURLFL")]
-        public string SiteURLFL { get; set; }
+        [JsonPropertyName("pathTestDataFL")]
+        public string pathTestDataFL { get; set; }
 
-        [JsonPropertyName("SiteURLUL")]
-        public string SiteURLUL { get; set; }
+        [JsonPropertyName("pathTestDataUL")]
+        public string pathTestDataUL { get; set; }
 
-        [JsonPropertyName("SiteURLCommon")]
-        public string SiteURLCommon { get; set; }
+        [JsonPropertyName("pathTestDataCommon")]
+        public string pathTestDataCommon { get; set; }
 
-        [JsonPropertyName("PathReportTest")]
-        public string PathReportTest { get; set; }
+        [JsonPropertyName("listURL")]
+        public List<ListURL> listURL { get; set; }
 
-        [JsonPropertyName("ScreenshotFailedTest")]
-        public string ScreenshotFailedTest { get; set; }
+    }
 
-        [JsonPropertyName("PathTestDataFL")]
-        public string PathTestDataFL { get; set; }
 
-        [JsonPropertyName("PathTestDataUL")]
-        public string PathTestDataUL { get; set; }
+    public class ListURL
+    {
+        [JsonPropertyName("name")]
+        public string name { get; set; }
 
-        [JsonPropertyName("PathTestDataCommon")]
-        public string PathTestDataCommon { get; set; }
+        [JsonPropertyName("urlApiFL")]
+        public string urlApiFL { get; set; }
 
+        [JsonPropertyName("urlApiUL")]
+        public string urlApiUL { get; set; }
+
+        [JsonPropertyName("urlSiteFL")]
+        public string urlSiteFL { get; set; }
+
+        [JsonPropertyName("urlSiteUL")]
+        public string urlSiteUL { get; set; }
     }
 }

@@ -1,12 +1,23 @@
 ﻿{
-  "ApiUrlUL": "https://api-lkul-iesbk.dev.enplus.digital/api/",
-  "ApiUrlFL": "https://api-lkpl-iesbk.dev.enplus.digital/api/",
-  "SiteURLFL": "https://sbyt-irkutskenergo.dev.enplus.digital/",
-  "SiteURLUL": "https://lkul-iesbk.dev.enplus.digital",
-  "SiteURLCommon": "https://sbyt-irkutskenergo.dev.enplus.digital/",
-  "PathReportTest": "C:\\Users\\SklyarovMD\\source\\repos\\TestApiIesbk\\TestApiIesbk\\reportTest.html",
-  "ScreenshotFailedTest": "C:\\Users\\SklyarovMD\\source\\repos\\TestApiIesbk\\TestApiIesbk\\ScreenshotFailedTest",
-  "PathTestDataFL": "C:\\Users\\SklyarovMD\\source\\repos\\TestApiIesbk\\TestApiIesbk\\testdataFl.json",
-  "PathTestDataUL": "C:\\Users\\SklyarovMD\\source\\repos\\TestApiIesbk\\TestApiIesbk\\testdataUl.json",
-  "PathTestDataCommon": "C:\\Users\\SklyarovMD\\source\\repos\\TestApiIesbk\\TestApiIesbk\\testdataCommon.json"
+  "pathReportTest": "C:\\Users\\SklyarovMD\\source\\repos\\TestApiIesbk\\TestApiIesbk\\reportTest.html",
+  "screenshotFailedTest": "C:\\Users\\SklyarovMD\\source\\repos\\TestApiIesbk\\TestApiIesbk\\ScreenshotFailedTest",
+  "pathTestDataFL": "C:\\Users\\SklyarovMD\\source\\repos\\TestApiIesbk\\TestApiIesbk\\testdataFl.json",
+  "pathTestDataUL": "C:\\Users\\SklyarovMD\\source\\repos\\TestApiIesbk\\TestApiIesbk\\testdataUl.json",
+  "pathTestDataCommon": "C:\\Users\\SklyarovMD\\source\\repos\\TestApiIesbk\\TestApiIesbk\\testdataCommon.json",
+  "listURL": [
+    {
+      "name": "Иркутскэнергосбыт",
+      "urlApiFL": "https://api-lkpl-iesbk.dev.enplus.digital/api/",
+      "urlApiUL": "https://api-lkul-iesbk.dev.enplus.digital/api/",
+      "urlSiteFL": "https://sbyt-irkutskenergo.dev.enplus.digital/",
+      "urlSiteUL": "https://lkul-iesbk.dev.enplus.digital"
+    },
+    {
+      "name": "Волгоэнергосбыт",
+      "urlApiFL": "https://api-lkpl-volga.dev.enplus.digital/api/",
+      "urlApiUL": "https://api-lkul-volga.dev.enplus.digital/api/",
+      "urlSiteFL": "https://sbyt-volga.dev.enplus.digital/",
+      "urlSiteUL": "https://lkul-volga.dev.enplus.digital"
+    }
+  ]
 }

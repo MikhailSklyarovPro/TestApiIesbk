@@ -12,19 +12,19 @@ namespace TestApiIesbk.Controller
         public static List<TestDataUL> GetTestData()
         {
 
-            string jsonString = File.ReadAllText(GlobalMethod.GetAppSetting().PathTestDataUL);
+            string jsonString = File.ReadAllText(GlobalMethod.GetAppSetting().pathTestDataUL);
             List<TestDataUL> testData = JsonSerializer.Deserialize<List<TestDataUL>>(jsonString)!;
             return testData;
         }
 
         //Вход техподдержки и получение токена авторизации
-        public static string LoginUserTech(string login, string password)
+        public static string LoginUserTech(string baseUrl, string login, string password)
         {
             //Параметры запроса(метод апи)
             string urlParametrs = "service/tech/auth/login";
 
             //Основной путь  
-            string URL = GlobalMethod.GetAppSetting().ApiUrlUL + urlParametrs;
+            string URL = baseUrl + urlParametrs;
             //Создаем экземпляр класса для отправки запросов к веб-ресурсам
             HttpClient client = new HttpClient();
             //Задаем базовый путь до веб-ресурса
@@ -68,13 +68,13 @@ namespace TestApiIesbk.Controller
         }
 
         //Вход пользователя из под ЛК техподдержки и получение токена авторизации
-        public static string LoginUserFromTech(string login, string password, string tokenTech)
+        public static string LoginUserFromTech(string baseUrl, string login, string password, string tokenTech)
         {
             //Параметры запроса(метод апи)
             string urlParametrs = "auth/login_tech";
 
             //Основной путь  
-            string URL = GlobalMethod.GetAppSetting().ApiUrlUL + urlParametrs;
+            string URL = baseUrl + urlParametrs;
             //Создаем экземпляр класса для отправки запросов к веб-ресурсам
             HttpClient client = new HttpClient();
             //Задаем базовый путь до веб-ресурса
@@ -121,14 +121,14 @@ namespace TestApiIesbk.Controller
         }
 
         //Получение данных по договору 
-        public static List<ServerResponseContractInfoULModel> GetDataByContract(string token)
+        public static List<ServerResponseContractInfoULModel> GetDataByContract(string baseUrl, string token)
         {
             //Полученные данные
             List<ServerResponseContractInfoULModel> listContract = new List<ServerResponseContractInfoULModel>();
             //Параметры запроса(метод апи)
             string urlParametrs = "contracts";
             //Основной путь  
-            string URL = GlobalMethod.GetAppSetting().ApiUrlUL;
+            string URL = baseUrl;
             //Создаем экземпляр класса для отправки запросов к веб-ресурсам
             HttpClient client = new HttpClient();
             //Задаем базовый путь до веб-ресурса
@@ -164,14 +164,14 @@ namespace TestApiIesbk.Controller
 
 
         //Получение данных о приборах учета
-        public static List<ServerResponseDevicesULModel> GetInfoDevices(string contractId, string token)
+        public static List<ServerResponseDevicesULModel> GetInfoDevices(string baseUrl, string contractId, string token)
         {
             //Полученные данные
             List<ServerResponseDevicesULModel> devices = new List<ServerResponseDevicesULModel>();
             //Параметры запроса(метод апи)
             string urlParametrs = $"contract/{contractId}/devices";
             //Основной путь  
-            string URL = GlobalMethod.GetAppSetting().ApiUrlUL;
+            string URL = baseUrl;
             //Создаем экземпляр класса для отправки запросов к веб-ресурсам
             HttpClient client = new HttpClient();
             //Задаем базовый путь до веб-ресурса

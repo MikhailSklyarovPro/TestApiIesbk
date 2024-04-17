@@ -14,12 +14,14 @@ using TestApiIesbk.PageObject;
 [SetUpFixture]
 public class TestSuite
     {
-
+        public string timeBeginTest = ""; 
         //Выполняется перед запуском всех тестов
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            string documentPath = GlobalMethod.GetAppSetting().PathReportTest;
+            timeBeginTest = $"{DateTime.Now} : {DateTime.Now.Millisecond}";
+            //Получаем путь до отчета
+            string documentPath = GlobalMethod.GetAppSetting().pathReportTest;
 
             try
             {
@@ -28,45 +30,25 @@ public class TestSuite
                 // Загружаем html документ
                 document.Load(documentPath);
 
-                //Ищем секцию с началом времени тестирования
-                HtmlNode sectionTimeBeginTest = document.DocumentNode.SelectSingleNode("//div[@id='timeBegin']");
+                //Ищем секцию таблиц
+                HtmlNode sectionTables = document.DocumentNode.SelectSingleNode("//div[@class='wrapperTable']");
+                //Удаляем все содержимое в этой секции
+                sectionTables.RemoveAllChildren();
 
-                // Ищем старое время начала тестирования
-                HtmlNode oldTimeBeginTest = document.DocumentNode.SelectSingleNode("//div[@id='timeBegin']//h1");
-                if (oldTimeBeginTest != null)
-                {
-                    //Удаляем старое время начала тестирования
-                    oldTimeBeginTest.Remove();
-                }
-
-                //Создаем новое время начала тестирования
-                HtmlNode newTimeBeginTest = document.CreateElement("h1");
-
-                //Создаем текст заголовка
-                HtmlNode newValueTimeBeginTest = document.CreateTextNode($"Тестирование началось: {DateTime.Now}:{DateTime.Now.Millisecond}");
-                //Добавляем заголовку новое значение
-                newTimeBeginTest.AppendChild(newValueTimeBeginTest);
-                //Добавляем новый заголовок начала времени тестирования
-                sectionTimeBeginTest.AppendChild(newTimeBeginTest);
-
-                // Ищем старое тело таблицы
-                HtmlNode oldTbody = document.DocumentNode.SelectSingleNode("//tbody");
-                if (oldTbody != null)
-                {
-                    // Удаляем старое тело таблицы
-                    oldTbody.Remove();
-                }
-
-
+                //Ищем секцию меню
+                HtmlNode sectionMenu = document.DocumentNode.SelectSingleNode("//ul[@class='listMenu']");
+                //Удаляем все содержимое в этой секции
+                sectionMenu.RemoveAllChildren();
+                
                 try
                 {
                     //true - если директория не пуста удаляем все ее содержимое
-                    Directory.Delete(GlobalMethod.GetAppSetting().ScreenshotFailedTest, true);
-                    Directory.CreateDirectory(GlobalMethod.GetAppSetting().ScreenshotFailedTest);
+                    Directory.Delete(GlobalMethod.GetAppSetting().screenshotFailedTest, true);
+                    Directory.CreateDirectory(GlobalMethod.GetAppSetting().screenshotFailedTest);
                 }
                 catch
                 {
-                    Directory.CreateDirectory(GlobalMethod.GetAppSetting().ScreenshotFailedTest);
+                    Directory.CreateDirectory(GlobalMethod.GetAppSetting().screenshotFailedTest);
                 }
 
                 //Сохраняем файл
@@ -82,82 +64,209 @@ public class TestSuite
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
-            string documentPath = GlobalMethod.GetAppSetting().PathReportTest;
-            // Создать экземпляр HTML-документа
+            //Получаем путь до отчета
+            string documentPath = GlobalMethod.GetAppSetting().pathReportTest;
+
+            //Создать экземпляр HTML-документа
             HtmlDocument document = new HtmlDocument();
-            // Загружаем html документ
+
+            //Загружаем html документ
             document.Load(documentPath);
 
-            // Создаем тело таблицы
-            HtmlNode newBody = document.CreateElement("tbody");
-            foreach (RowTableReportModel rowTableReport in GlobalMethod.ListRowTableReport)
+            //Ищем секцию таблиц
+            HtmlNode sectionTables = document.DocumentNode.SelectSingleNode("//div[@class='wrapperTable']");
+
+            //Ищем секцию меню
+            HtmlNode sectionMenu = document.DocumentNode.SelectSingleNode("//ul[@class='listMenu']");
+
+            //Создаем в цикле таблицы отчетов для каждой компании
+            for(int i=0; i<GlobalMethod.GetAppSetting().listURL.Count; i++) 
             {
-                // Создаем строку таблицы
-                HtmlNode newRow = document.CreateElement("tr");
-                if (rowTableReport.result == "Passed") { newRow.SetAttributeValue("style", "color:green;"); }
-                if (rowTableReport.result == "Failed") { newRow.SetAttributeValue("style", "color:red; font-weight: bold;"); }
-                //TODO:Проверить правильное название Ignore
-                if (rowTableReport.result == "Ignore") { newRow.SetAttributeValue("style", "color:yellow;"); }
+                //Создаем новую таблицу
+                HtmlNode newTable = document.CreateElement("table");
+                //Добляем таблице id
+                newTable.SetAttributeValue("id", $"table{i+1}");
+                //Добляем таблице класс
+                newTable.SetAttributeValue("class", "tableReport");
 
-                // Создаем ячейки таблицы
-                HtmlNode numberTestCell = document.CreateElement("td");
-                HtmlNode parentClassCell = document.CreateElement("td");
-                HtmlNode resultCell = document.CreateElement("td");
-                HtmlNode timeExecutionCell = document.CreateElement("td");
-                HtmlNode messageCell = document.CreateElement("td");
-                HtmlNode inputDataCell = document.CreateElement("td");
-                HtmlNode screenshotCell = document.CreateElement("td");
-
-                // Создаем значение для ячеек
-                HtmlTextNode numberTestValue = document.CreateTextNode(rowTableReport.numberTest);
-                HtmlTextNode parentClassValue = document.CreateTextNode(rowTableReport.parentClass);
-                HtmlTextNode resultValue = document.CreateTextNode(rowTableReport.result);
-                HtmlTextNode timeExecutionValue = document.CreateTextNode(rowTableReport.timeExecution);
-                HtmlTextNode messageValue = document.CreateTextNode(rowTableReport.message);
-                HtmlTextNode inputDataValue = document.CreateTextNode(rowTableReport.testData);
-
-                //Добавляем в ячейки значения
-                numberTestCell.AppendChild(numberTestValue);
-                parentClassCell.AppendChild(parentClassValue);
-                resultCell.AppendChild(resultValue);
-                timeExecutionCell.AppendChild(timeExecutionValue);
-                messageCell.AppendChild(messageValue);
-                inputDataCell.AppendChild(inputDataValue);
-
-                //Добавляем в строку ячейки
-                newRow.AppendChild(numberTestCell);
-                newRow.AppendChild(parentClassCell);
-                newRow.AppendChild(resultCell);
-                newRow.AppendChild(timeExecutionCell);
-                newRow.AppendChild(messageCell);
-                newRow.AppendChild(inputDataCell);
-
-                //Проверяем существует ли файл снимка ошибки 
-                if (File.Exists($"{GlobalMethod.GetAppSetting().ScreenshotFailedTest}\\{rowTableReport.numberTest}.jpg"))
-                {
-                    HtmlNode screenshotLink = document.CreateElement("a");
-                    HtmlTextNode screenshotValue = document.CreateTextNode("Смотреть");
-                    screenshotLink.SetAttributeValue("href", $"{GlobalMethod.GetAppSetting().ScreenshotFailedTest}\\{rowTableReport.numberTest}.jpg");
-                    screenshotLink.AppendChild(screenshotValue);
-                    screenshotCell.AppendChild(screenshotLink);
-                    newRow.AppendChild(screenshotCell);
+                //Создаем новый пункт меню
+                HtmlNode newItemMenu = document.CreateElement("li");
+                //Устанавливает атрибут onclick
+                newItemMenu.SetAttributeValue("onclick", $"clickTab('table{i+1}', this)");
+                //Если это первый пункт меню делаем его активным
+                if(i == 0) {
+                    newItemMenu.SetAttributeValue("class", "activeItemMenu");
+                    newTable.SetAttributeValue("style", "display:block");
                 }
-                else
+                else{
+                    newItemMenu.SetAttributeValue("class", "itemMenu");
+                    newTable.SetAttributeValue("style", "display:none");
+                }
+                //Создаем текст пункта меню и ложим туда название компании из настроек
+                HtmlTextNode nameMenu = document.CreateTextNode(GlobalMethod.GetAppSetting().listURL[i].name);
+                //Добавляем к пункту меню текст 
+                newItemMenu.AppendChild(nameMenu);
+                //Добавляем пункт меню к секции меню (ul)
+                sectionMenu.AppendChild(newItemMenu);
+
+                //Создаем новую строку
+                HtmlNode newRowHead = document.CreateElement("tr");
+
+                //Создаем новые ячейки заголовка таблицы и ширину заголовков
+                HtmlNode numberHeadCell = document.CreateElement("th");
+                numberHeadCell.SetAttributeValue("width", "5%");
+                HtmlNode nameMethodHeadCell = document.CreateElement("th");
+                nameMethodHeadCell.SetAttributeValue("width", "12%");
+                HtmlNode rezultHeadCell = document.CreateElement("th");
+                rezultHeadCell.SetAttributeValue("width", "8%");
+                HtmlNode checkHeadCell = document.CreateElement("th");
+                checkHeadCell.SetAttributeValue("width", "11%");
+                HtmlNode timeHeadCell = document.CreateElement("th");
+                timeHeadCell.SetAttributeValue("width", "10%");
+                HtmlNode messageHeadCell = document.CreateElement("th");
+                messageHeadCell.SetAttributeValue("width", "20%");
+                HtmlNode testDataHeadCell = document.CreateElement("th");
+                testDataHeadCell.SetAttributeValue("width", "24%");
+                HtmlNode screenHeadCell = document.CreateElement("th");
+                screenHeadCell.SetAttributeValue("width", "10%");
+
+                //Устанавливает в ячейки текст
+                HtmlTextNode numberHeadValue = document.CreateTextNode("№");
+                HtmlTextNode nameMethodHeadValue = document.CreateTextNode("Метод");
+                HtmlTextNode rezultHeadValue = document.CreateTextNode("Результат");
+                HtmlTextNode checkHeadValue = document.CreateTextNode("Проверка");
+                HtmlTextNode timeHeadValue = document.CreateTextNode("Время");
+                HtmlTextNode messageHeadValue = document.CreateTextNode("Сообщение");
+                HtmlTextNode testDataHeadValue = document.CreateTextNode("Тестовые данные");
+                HtmlTextNode screenHeadValue = document.CreateTextNode("Скриншот");
+                
+                //Записываем текст в ячейки
+                numberHeadCell.AppendChild(numberHeadValue);
+                nameMethodHeadCell.AppendChild(nameMethodHeadValue);
+                rezultHeadCell.AppendChild(rezultHeadValue);
+                checkHeadCell.AppendChild(checkHeadValue);
+                timeHeadCell.AppendChild(timeHeadValue);
+                messageHeadCell.AppendChild(messageHeadValue);
+                testDataHeadCell.AppendChild(testDataHeadValue);
+                screenHeadCell.AppendChild(screenHeadValue);
+                
+                //Добвляем ячейки в строку
+                newRowHead.AppendChild(numberHeadCell);
+                newRowHead.AppendChild(nameMethodHeadCell);
+                newRowHead.AppendChild(rezultHeadCell);
+                newRowHead.AppendChild(checkHeadCell);
+                newRowHead.AppendChild(timeHeadCell);
+                newRowHead.AppendChild(messageHeadCell);
+                newRowHead.AppendChild(testDataHeadCell);
+                newRowHead.AppendChild(screenHeadCell);
+                
+                //Добавляем в таблицу строку с заголовком
+                newTable.AppendChild(newRowHead);
+
+                //Создаем тело таблицы
+                HtmlNode newBody = document.CreateElement("tbody");
+                
+                //Добавляем в цикле к каждой таблице компании все результаты тестов
+                foreach (RowTableReportModel rowTableReport in GlobalMethod.ListRowTableReport)
                 {
-                    HtmlTextNode screenshotValue = document.CreateTextNode("-");
-                    screenshotCell.AppendChild(screenshotValue);
-                    newRow.AppendChild(screenshotCell);
+                    if (rowTableReport.nameCompany == GlobalMethod.GetAppSetting().listURL[i].name)
+                    {
+                        //Создаем строку таблицы
+                        HtmlNode newRow = document.CreateElement("tr");
+
+                        // Создаем ячейки таблицы
+                        HtmlNode numberTestCell = document.CreateElement("td");
+                        HtmlNode parentClassCell = document.CreateElement("td");
+                        HtmlNode resultCell = document.CreateElement("td");
+                        HtmlNode checkCell = document.CreateElement("td");
+                        HtmlNode timeExecutionCell = document.CreateElement("td");
+                        HtmlNode messageCell = document.CreateElement("td");
+                        HtmlNode inputDataCell = document.CreateElement("td");
+                        HtmlNode screenshotCell = document.CreateElement("td");
+
+                        // Создаем значение для ячеек
+                        HtmlTextNode numberTestValue = document.CreateTextNode(rowTableReport.numberTest);
+                        HtmlTextNode parentClassValue = document.CreateTextNode(rowTableReport.parentClass);
+                        HtmlTextNode resultValue = document.CreateTextNode(rowTableReport.result);
+                        if(rowTableReport.needCheckbox){
+                            HtmlNode inputYes = document.CreateElement("input");
+                            HtmlNode labelYes = document.CreateElement("label");
+                            HtmlNode inputNo = document.CreateElement("input");
+                            HtmlNode labelNo = document.CreateElement("label");
+                            inputYes.SetAttributeValue("type", "radio");
+                            inputYes.SetAttributeValue("class", "customCheckbox Yes");
+                            inputYes.SetAttributeValue("id", $"checkboxYes{rowTableReport.numberTest + 1}");
+                            inputYes.SetAttributeValue("name", $"checkbox{rowTableReport.numberTest + 1}");
+                            inputYes.SetAttributeValue("value", $"notSelected");
+                            labelYes.SetAttributeValue("for", $"checkboxYes{rowTableReport.numberTest + 1}");
+                            labelYes.AppendChild(document.CreateTextNode("Да"));
+
+                            inputNo.SetAttributeValue("type", "radio");
+                            inputNo.SetAttributeValue("class", "customCheckbox No");
+                            inputNo.SetAttributeValue("id", $"checkboxNo{rowTableReport.numberTest + 1}");
+                            inputNo.SetAttributeValue("name", $"checkbox{rowTableReport.numberTest + 1}");
+                            inputNo.SetAttributeValue("value", $"notSelected");
+                            labelNo.SetAttributeValue("for", $"checkboxNo{rowTableReport.numberTest + 1}");
+                            labelNo.AppendChild(document.CreateTextNode("Нет"));
+
+                            checkCell.AppendChild(inputYes);
+                            checkCell.AppendChild(labelYes);
+                            checkCell.AppendChild(inputNo);
+                            checkCell.AppendChild(labelNo);
+                        }
+                        HtmlTextNode timeExecutionValue = document.CreateTextNode(rowTableReport.timeExecution);
+                        HtmlTextNode messageValue = document.CreateTextNode(rowTableReport.message);
+                        HtmlTextNode inputDataValue = document.CreateTextNode(rowTableReport.testData);
+
+                        //Задаем стили для отображения результатов тестов
+                        if (rowTableReport.result == "Passed") { resultCell.SetAttributeValue("style", "color:green;"); }
+                        if (rowTableReport.result == "Failed") { resultCell.SetAttributeValue("style", "color:red;"); }
+                        if (rowTableReport.result == "Ignore") { resultCell.SetAttributeValue("style", "color:yellow;"); }
+
+                        //Добавляем в ячейки значения
+                        numberTestCell.AppendChild(numberTestValue);
+                        parentClassCell.AppendChild(parentClassValue);
+                        resultCell.AppendChild(resultValue);
+                        timeExecutionCell.AppendChild(timeExecutionValue);
+                        messageCell.AppendChild(messageValue);
+                        inputDataCell.AppendChild(inputDataValue);
+
+                        //Добавляем в строку ячейки
+                        newRow.AppendChild(numberTestCell);
+                        newRow.AppendChild(parentClassCell);
+                        newRow.AppendChild(resultCell);
+                        newRow.AppendChild(checkCell);
+                        newRow.AppendChild(timeExecutionCell);
+                        newRow.AppendChild(messageCell);
+                        newRow.AppendChild(inputDataCell);
+
+                        //Проверяем существует ли файл снимка ошибки 
+                        if (File.Exists($"{GlobalMethod.GetAppSetting().screenshotFailedTest}\\{rowTableReport.numberTest}.jpg"))
+                        {
+                            HtmlNode screenshotLink = document.CreateElement("a");
+                            HtmlTextNode screenshotValue = document.CreateTextNode("Смотреть");
+                            screenshotLink.SetAttributeValue("href", $"{GlobalMethod.GetAppSetting().screenshotFailedTest}\\{rowTableReport.numberTest}.jpg");
+                            screenshotLink.AppendChild(screenshotValue);
+                            screenshotCell.AppendChild(screenshotLink);
+                            newRow.AppendChild(screenshotCell);
+                        }
+                        else
+                        {
+                            HtmlTextNode screenshotValue = document.CreateTextNode("-");
+                            screenshotCell.AppendChild(screenshotValue);
+                            newRow.AppendChild(screenshotCell);
+                        }
+
+                        //Добавляем в тело таблицы строку
+                        newBody.AppendChild(newRow);
+                    }
                 }
 
-                //Добавляем в тело таблицы строку
-                newBody.AppendChild(newRow);
+                //Добавляем к таблице тело
+                newTable.AppendChild(newBody);
+                //Добавляем к секции новую таблицу
+                sectionTables.AppendChild(newTable);
             }
-
-            // Ищем старую таблицу
-            HtmlNode oldTable = document.DocumentNode.SelectSingleNode("//table");
-
-            //Добавляем к таблице новое тело
-            oldTable.AppendChild(newBody);
 
             //Ищем секцию с началом времени тестирования
             HtmlNode sectionInfoTest = document.DocumentNode.SelectSingleNode("//div[@id='infoTest']");
@@ -175,7 +284,7 @@ public class TestSuite
             HtmlNode newInfoTest = document.CreateElement("p");
 
             //Создаем текст заголовка
-            HtmlNode newValueInfoTest = document.CreateTextNode($"Всего тестов запущено: {TestContext.CurrentContext.Result.FailCount + TestContext.CurrentContext.Result.PassCount} | Успешно: {TestContext.CurrentContext.Result.PassCount} | Провалено: {TestContext.CurrentContext.Result.FailCount} | Процент пройденных {TestContext.CurrentContext.Result.PassCount * 100 / (TestContext.CurrentContext.Result.FailCount + TestContext.CurrentContext.Result.PassCount)}% | Тестирование завершено: {DateTime.Now}:{DateTime.Now.Millisecond}");
+            HtmlNode newValueInfoTest = document.CreateTextNode($"Всего тестов запущено: {TestContext.CurrentContext.Result.FailCount + TestContext.CurrentContext.Result.PassCount} | Успешно: {TestContext.CurrentContext.Result.PassCount} | Провалено: {TestContext.CurrentContext.Result.FailCount} | Процент пройденных {TestContext.CurrentContext.Result.PassCount * 100 / (TestContext.CurrentContext.Result.FailCount + TestContext.CurrentContext.Result.PassCount)}% | Тестирование началось: {timeBeginTest} | Тестирование завершено: {DateTime.Now}:{DateTime.Now.Millisecond}");
             //Добавляем заголовку новое значение
             newInfoTest.AppendChild(newValueInfoTest);
             //Добавляем новый заголовок начала времени тестирования
@@ -195,7 +304,22 @@ namespace TestApiIesbk.TestIesbk
         [TearDown]
         public void TearDown()
         {
+            string testData = JsonSerializer.Serialize(TestContext.CurrentContext.Test.Arguments[0]);
+            Dictionary<string, object> parsedObject = JsonSerializer.Deserialize<Dictionary<string, object>>(testData)!;
+            string url = parsedObject!.FirstOrDefault(kv => kv.Key == "urlApi").Value.ToString()!;
+            string nameCompany = "";
+            foreach (ListURL company in GlobalMethod.GetAppSetting().listURL)
+            {
+                if (company.urlApiFL == url || company.urlApiUL == url)
+                {
+                    nameCompany = company.name;
+                    break;
+                }
+            }
+
             RowTableReportModel rowTable = new RowTableReportModel();
+            rowTable.needCheckbox = true;
+            rowTable.nameCompany = nameCompany;
             rowTable.testData = JsonSerializer.Serialize(TestContext.CurrentContext.Test.Arguments[0]!); //Аргуметы теста
             rowTable.numberTest = TestContext.CurrentContext.Test.Arguments[1]!.ToString()!; //Номер теста
             rowTable.parentClass = TestContext.CurrentContext.Test.MethodName!; //Полное имя теста с параметрами
@@ -228,7 +352,7 @@ namespace TestApiIesbk.TestIesbk
         [Test, TestCaseSource(nameof(GetParametrs))]
         public void LoginFlAPI(TestDataFL testData, int numberTest)
         {
-            FLController.LoginUser(testData.testSettings.login, testData.testSettings.password);
+            FLController.LoginUser(testData.urlApi, testData.testSettings.login, testData.testSettings.password);
             Assert.Pass("Вход пользователя в личный кабинет ФЛ API.");
         }
 
@@ -239,10 +363,10 @@ namespace TestApiIesbk.TestIesbk
         public void CheckBalanceUserFLAPI(TestDataFL testData, int numberTest)
         {
             //Получаем данные пользователя от API
-            ServerResponseUserInfoFLModel userData = FLController.GetDataUser(FLController.LoginUser(testData.testSettings.login, testData.testSettings.password));
-            //Проверка полученных данных от API на соответсвие тестовых данных в json файле
-            if (testData.testSettings.balance != userData.account.balance.ToString()) { Assert.Fail($"Действие: Проверка на соответсвие баланса пользователя ФЛ от АПИ с тестовыми данными. Результат: Баланс: {testData.testSettings.balance} в тестовых данных не совпадает с полученным от API балансом: {userData.account.balance}"); }
-            Assert.Pass("Проверка на соответсвие баланса пользователя ФЛ от АПИ с тестовыми данными.");
+            ServerResponseUserInfoFLModel userData = FLController.GetDataUser(testData.urlApi, FLController.LoginUser(testData.urlApi, testData.testSettings.login, testData.testSettings.password));
+            //Проверка полученных данных от API на соответствие тестовых данных в json файле
+            if (testData.testSettings.balance != userData.account.balance.ToString()) { Assert.Fail($"Действие: Проверка на соответствие баланса пользователя ФЛ от АПИ с тестовыми данными. Результат: Баланс: {testData.testSettings.balance} в тестовых данных не совпадает с полученным от API балансом: {userData.account.balance}"); }
+            Assert.Pass("Проверка на соответствие баланса пользователя ФЛ от АПИ с тестовыми данными.");
         }
 
 
@@ -252,7 +376,7 @@ namespace TestApiIesbk.TestIesbk
         public void CheckIdDeviceFLAPI(TestDataFL testData, int numberTest)
         {
             //Получаем данные пользователя от API
-            List<ServerResponseDevicesFLModel> devices = FLController.GetDevices(FLController.LoginUser(testData.testSettings.login, testData.testSettings.password));
+            List<ServerResponseDevicesFLModel> devices = FLController.GetDevices(testData.urlApi, FLController.LoginUser(testData.urlApi, testData.testSettings.login, testData.testSettings.password));
 
             //Прибор учета с переданным id найден?
             string foundDeviceId = "";
@@ -264,9 +388,9 @@ namespace TestApiIesbk.TestIesbk
                 if (device.id.ToString() == testData.testSettings.deviceId) { foundDeviceId = device.id.ToString(); }
                 allDeviceId = $"{allDeviceId}, {device.id}";
             }
-            //Проверка полученных данных от API на соответсвие тестовых данных в json файле
-            if (foundDeviceId == "") { Assert.Fail($"Действие: Проверка на соответсвие id прибора учета пользователя ФЛ от АПИ с тестовыми данными. Результат: Прибор учета с id: {testData.testSettings.deviceId} в тестовых данных не совпадает с полученным(и) от API id: {allDeviceId}"); }
-            Assert.Pass("Проверка на соответсвие id прибора учета пользователя ФЛ от АПИ с тестовыми данными.");
+            //Проверка полученных данных от API на соответствие тестовых данных в json файле
+            if (foundDeviceId == "") { Assert.Fail($"Действие: Проверка на соответствие id прибора учета пользователя ФЛ от АПИ с тестовыми данными. Результат: Прибор учета с id: {testData.testSettings.deviceId} в тестовых данных не совпадает с полученным(и) от API id: {allDeviceId}"); }
+            Assert.Pass("Проверка на соответствие id прибора учета пользователя ФЛ от АПИ с тестовыми данными.");
         }
 
 
@@ -280,7 +404,7 @@ namespace TestApiIesbk.TestIesbk
             //Открываем окно бразуера на весь экран
             _webDriver.Manage().Window.Maximize();
             //Переходим на главну. страницу сайта ФЛ
-            _webDriver.Navigate().GoToUrl(MainPageFLPageObject.LocatMainPageFL);
+            _webDriver.Navigate().GoToUrl(testData.urlSite);
             //Создаем экземпляр главной страницы сайта ФЛ
             MainPageFLPageObject mainPageFLPage = new MainPageFLPageObject(_webDriver);
             //Нажимаем на кнопку личный кабинет
@@ -311,7 +435,7 @@ namespace TestApiIesbk.TestIesbk
             //Открываем окно бразуера на весь экран
             _webDriver.Manage().Window.Maximize();
             //Переходим на главну. страницу сайта ФЛ
-            _webDriver.Navigate().GoToUrl(MainPageFLPageObject.LocatMainPageFL);
+            _webDriver.Navigate().GoToUrl(testData.urlSite);
             //Создаем экземпляр главной страницы сайта ФЛ
             MainPageFLPageObject mainPageFLPage = new MainPageFLPageObject(_webDriver);
             //Нажимаем на кнопку личный кабинет для теходдержки
@@ -333,7 +457,7 @@ namespace TestApiIesbk.TestIesbk
         [Test, TestCaseSource(nameof(GetParametrs))]
         public void LoginTechAPI(TestDataFL testData, int numberTest)
         {
-            FLController.LoginUserTech(testData.techLogin, testData.techPassword);
+            FLController.LoginUserTech(testData.urlApi, testData.techLogin, testData.techPassword);
             Assert.Pass("Вход техподдержки в личный кабинет ФЛ API.");
         }
 
@@ -343,7 +467,7 @@ namespace TestApiIesbk.TestIesbk
         [Test, TestCaseSource(nameof(GetParametrs))]
         public void LoginUserFromTechAPI(TestDataFL testData, int numberTest)
         {
-            FLController.LoginUserFromTech(testData.testSettings.login, testData.testSettings.authenticator, FLController.LoginUserTech(testData.techLogin, testData.techPassword));
+            FLController.LoginUserFromTech(testData.urlApi, testData.testSettings.login, testData.testSettings.authenticator, FLController.LoginUserTech(testData.urlApi, testData.techLogin, testData.techPassword));
             Assert.Pass("Вход пользователя в ЛК из под ЛК техподдержки API.");
         }
 
@@ -354,10 +478,10 @@ namespace TestApiIesbk.TestIesbk
         public void CheckBalanceUserFromTechFLAPI(TestDataFL testData, int numberTest)
         {
             //Получаем данные пользователя от API
-            ServerResponseUserInfoFLModel userData = FLController.GetDataUser(FLController.LoginUserFromTech(testData.testSettings.login, testData.testSettings.authenticator, FLController.LoginUserTech(testData.techLogin, testData.techPassword)));
-            //Проверка полученных данных от API на соответсвие тестовых данных в json файле
-            if (testData.testSettings.balance != userData.account.balance.ToString()) { Assert.Fail($"Действие: Проверка на соответсвие баланса пользователя ФЛ от АПИ с тестовыми данными, авторизированного из под ЛК техподдержки с помощью 'ЛК ФЛ (Служба поддержки)'. Результат: Баланс: {testData.testSettings.balance} в тестовых данных не совпадает с полученным от API балансом: {userData.account.balance}"); }
-            Assert.Pass("Проверка на соответсвие тестовых данных и API данных баланса пользователя ФЛ, авторизированного из под ЛК техподдержки с помощью 'ЛК ФЛ (Служба поддержки)'");
+            ServerResponseUserInfoFLModel userData = FLController.GetDataUser(testData.urlApi, FLController.LoginUserFromTech(testData.urlApi, testData.testSettings.login, testData.testSettings.authenticator, FLController.LoginUserTech(testData.urlApi, testData.techLogin, testData.techPassword)));
+            //Проверка полученных данных от API на соответствие тестовых данных в json файле
+            if (testData.testSettings.balance != userData.account.balance.ToString()) { Assert.Fail($"Действие: Проверка на соответствие баланса пользователя ФЛ от АПИ с тестовыми данными, авторизированного из под ЛК техподдержки с помощью 'ЛК ФЛ (Служба поддержки)'. Результат: Баланс: {testData.testSettings.balance} в тестовых данных не совпадает с полученным от API балансом: {userData.account.balance}"); }
+            Assert.Pass("Проверка на соответствие тестовых данных и API данных баланса пользователя ФЛ, авторизированного из под ЛК техподдержки с помощью 'ЛК ФЛ (Служба поддержки)'");
         }
 
 
@@ -367,7 +491,7 @@ namespace TestApiIesbk.TestIesbk
         public void CheckIdDeviceFromTechFLAPI(TestDataFL testData, int numberTest)
         {
             //Получаем данные пользователя от API
-            List<ServerResponseDevicesFLModel> devices = FLController.GetDevices(FLController.LoginUserFromTech(testData.testSettings.login, testData.testSettings.authenticator, FLController.LoginUserTech(testData.techLogin, testData.techPassword)));
+            List<ServerResponseDevicesFLModel> devices = FLController.GetDevices(testData.urlApi, FLController.LoginUserFromTech(testData.urlApi, testData.testSettings.login, testData.testSettings.authenticator, FLController.LoginUserTech(testData.urlApi, testData.techLogin, testData.techPassword)));
 
             //Прибор учета с переданным id найден?
             string foundDeviceId = "";
@@ -379,9 +503,9 @@ namespace TestApiIesbk.TestIesbk
                 if (device.id.ToString() == testData.testSettings.deviceId) { foundDeviceId = device.id.ToString(); }
                 allDeviceId = $"{allDeviceId}, {device.id}";
             }
-            //Проверка полученных данных от API на соответсвие тестовых данных в json файле
-            if (foundDeviceId == "") { Assert.Fail($"Действие: Проверка на соответсвие id прибора учета пользователя ФЛ от АПИ с тестовыми данными, авторизированного из под ЛК техподдержки с помощью 'ЛК ФЛ (Служба поддержки)'. Результат: Прибор учета с id: {testData.testSettings.deviceId} в тестовых данных не совпадает с полученным(и) от API id: {allDeviceId}"); }
-            Assert.Pass("Проверка на соответсвие тестовых данных и API данных id прибора учета пользователя ФЛ, авторизированного из под ЛК техподдержки с помощью 'ЛК ФЛ (Служба поддержки)'");
+            //Проверка полученных данных от API на соответствие тестовых данных в json файле
+            if (foundDeviceId == "") { Assert.Fail($"Действие: Проверка на соответствие id прибора учета пользователя ФЛ от АПИ с тестовыми данными, авторизированного из под ЛК техподдержки с помощью 'ЛК ФЛ (Служба поддержки)'. Результат: Прибор учета с id: {testData.testSettings.deviceId} в тестовых данных не совпадает с полученным(и) от API id: {allDeviceId}"); }
+            Assert.Pass("Проверка на соответствие тестовых данных и API данных id прибора учета пользователя ФЛ, авторизированного из под ЛК техподдержки с помощью 'ЛК ФЛ (Служба поддержки)'");
         }
 
 
@@ -407,7 +531,7 @@ namespace TestApiIesbk.TestIesbk
         [Test, TestCaseSource(nameof(GetParametrs))]
         public void LoginTechAPI(TestDataUL testData, int numberTest)
         {
-            ULController.LoginUserTech(testData.techLogin, testData.techPassword);
+            ULController.LoginUserTech(testData.urlApi, testData.techLogin, testData.techPassword);
             Assert.Pass("Вход техподдержки в личный кабинет ЮЛ API.");
         }
 
@@ -415,7 +539,7 @@ namespace TestApiIesbk.TestIesbk
         [Test, TestCaseSource(nameof(GetParametrs))]
         public void LoginUserFromTechAPI(TestDataUL testData, int numberTest)
         {
-            ULController.LoginUserFromTech(testData.testsettings.login, testData.testsettings.authenticator, ULController.LoginUserTech(testData.techLogin, testData.techPassword));
+            ULController.LoginUserFromTech(testData.urlApi, testData.testsettings.login, testData.testsettings.authenticator, ULController.LoginUserTech(testData.urlApi, testData.techLogin, testData.techPassword));
             Assert.Pass("Вход пользователя в ЛК из под ЛК техподдержки API.");
         }
 
@@ -424,7 +548,7 @@ namespace TestApiIesbk.TestIesbk
         public void CheckBalanceUserFromTechULAPI(TestDataUL testData, int numberTest)
         {
             //Получаем данные пользователя от API
-            List<ServerResponseContractInfoULModel> contracts = ULController.GetDataByContract(ULController.LoginUserFromTech(testData.testsettings.login, testData.testsettings.authenticator, ULController.LoginUserTech(testData.techLogin, testData.techPassword)));
+            List<ServerResponseContractInfoULModel> contracts = ULController.GetDataByContract(testData.urlApi, ULController.LoginUserFromTech(testData.urlApi, testData.testsettings.login, testData.testsettings.authenticator, ULController.LoginUserTech(testData.urlApi, testData.techLogin, testData.techPassword)));
 
             //Договор с переданным балансом найден?
             string foundContractBalance = "";
@@ -447,7 +571,7 @@ namespace TestApiIesbk.TestIesbk
         public void CheckIdDeviceFromTechULAPI(TestDataUL testData, int numberTest)
         {
             //Получаем данные пользователя от API
-            List<ServerResponseDevicesULModel> devices = ULController.GetInfoDevices(testData.testsettings.contractId, ULController.LoginUserFromTech(testData.testsettings.login, testData.testsettings.authenticator, ULController.LoginUserTech(testData.techLogin, testData.techPassword)));
+            List<ServerResponseDevicesULModel> devices = ULController.GetInfoDevices(testData.urlApi, testData.testsettings.contractId, ULController.LoginUserFromTech(testData.urlApi, testData.testsettings.login, testData.testsettings.authenticator, ULController.LoginUserTech(testData.urlApi, testData.techLogin, testData.techPassword)));
 
             //Прибор учета с переданным id найден?
             string foundDeviceId = "";
@@ -459,9 +583,9 @@ namespace TestApiIesbk.TestIesbk
                 if (device.id.ToString() == testData.testsettings.deviceId) { foundDeviceId = device.id.ToString(); }
                 allDeviceId = $"{allDeviceId}, {device.id}";
             }
-            //Проверка полученных данных от API на соответсвие тестовых данных в json файле
-            if (foundDeviceId == "") { Assert.Fail($"Действие: Проверка на соответсвие id прибора учета пользователя ЮЛ от АПИ с тестовыми данными, авторизированного из под ЛК техподдержки с помощью 'ЛК ЮЛ (Служба поддержки)'. Результат: Прибор учета с id: {testData.testsettings.deviceId} в тестовых данных не совпадает с полученным(и) от API id: {allDeviceId}"); }
-            Assert.Pass("Проверка на соответсвие тестовых данных и API данных id прибора учета пользователя >K, авторизированного из под ЛК техподдержки с помощью 'ЮЛ (Служба поддержки)'");
+            //Проверка полученных данных от API на соответствие тестовых данных в json файле
+            if (foundDeviceId == "") { Assert.Fail($"Действие: Проверка на соответствие id прибора учета пользователя ЮЛ от АПИ с тестовыми данными, авторизированного из под ЛК техподдержки с помощью 'ЛК ЮЛ (Служба поддержки)'. Результат: Прибор учета с id: {testData.testsettings.deviceId} в тестовых данных не совпадает с полученным(и) от API id: {allDeviceId}"); }
+            Assert.Pass("Проверка на соответствие тестовых данных и API данных id прибора учета пользователя >K, авторизированного из под ЛК техподдержки с помощью 'ЮЛ (Служба поддержки)'");
         }
     }
 
@@ -483,7 +607,7 @@ namespace TestApiIesbk.TestIesbk
         [Test, TestCaseSource(nameof(GetParametrs))]
         public void LoginCommonTechAPI(TestDataCommon allData, int numberTest)
         {
-            CommonController.LoginCommonTech(allData.techLogin, allData.techPassword);
+            CommonController.LoginCommonTech(allData.urlApi, allData.techLogin, allData.techPassword);
             Assert.Pass("Общий вход техподдержки в личный кабинет.");
         }
 
@@ -491,14 +615,14 @@ namespace TestApiIesbk.TestIesbk
         [Test, TestCaseSource(nameof(GetParametrs))]
         public void LoginCommonUserFromTechAPI(TestDataCommon allData, int numberTest)
         {
-            CommonController.LoginCommonTech(allData.techLogin, allData.techPassword);
+            CommonController.LoginCommonTech(allData.urlApi, allData.techLogin, allData.techPassword);
             Assert.Pass("Общий вход техподдержки в личный кабинет.");
         }
 
         [Test, TestCaseSource(nameof(GetParametrs))]
         public void CheckSendTestLetterAPI(TestDataCommon allData, int numberTest)
         {
-            CommonController.CheckSendTestLetter(CommonController.LoginCommonTech(allData.techLogin, allData.techPassword), allData.testsettings.email);
+            CommonController.CheckSendTestLetter(allData.urlApi, CommonController.LoginCommonTech(allData.urlApi, allData.techLogin, allData.techPassword), allData.testsettings.email);
             Assert.Pass($"Общая отправка тестового сообщения на email:{allData.testsettings.email}");
         }
 
@@ -506,7 +630,7 @@ namespace TestApiIesbk.TestIesbk
         [Test, TestCaseSource(nameof(GetParametrs))]
         public void CheckSendTestSmsAPI(TestDataCommon allData, int numberTest)
         {
-            CommonController.SendTestSms(CommonController.LoginCommonTech(allData.techLogin, allData.techPassword), allData.testsettings.phone);
+            CommonController.SendTestSms(allData.urlApi, CommonController.LoginCommonTech(allData.urlApi, allData.techLogin, allData.techPassword), allData.testsettings.phone);
             Assert.Pass($"Общая отправка тестового sms на телефон:{allData.testsettings.email}");
         }
     }

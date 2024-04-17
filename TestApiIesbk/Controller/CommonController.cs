@@ -12,20 +12,20 @@ namespace TestApiIesbk.Controller
         public static List<TestDataCommon> GetTestData()
         {
             //Читаем из json
-            string jsonString = File.ReadAllText(GlobalMethod.GetAppSetting().PathTestDataCommon);
+            string jsonString = File.ReadAllText(GlobalMethod.GetAppSetting().pathTestDataCommon);
             //Десериализуем в модель
             List<TestDataCommon> testData = JsonSerializer.Deserialize<List<TestDataCommon>>(jsonString)!;
             return testData;
         }
 
         //Вход техподдержки и получение токена авторизации
-        public static string LoginCommonTech(string login, string password)
+        public static string LoginCommonTech(string baseUrl, string login, string password)
         {
             //Параметры запроса(метод апи)
             string urlParametrs = "service/tech/auth/login";
 
             //Основной путь  
-            string URL = GlobalMethod.GetAppSetting().ApiUrlUL + urlParametrs;
+            string URL = baseUrl + urlParametrs;
             //Создаем экземпляр класса для отправки запросов к веб-ресурсам
             HttpClient client = new HttpClient();
             //Задаем базовый путь до веб-ресурса
@@ -69,13 +69,13 @@ namespace TestApiIesbk.Controller
         }
 
         //Отправка тестового письма на email
-        public static void CheckSendTestLetter(string tokenUser, string email)
+        public static void CheckSendTestLetter(string baseUrl, string tokenUser, string email)
         {
             //Параметры запроса(метод апи)
             string urlParametrs = "service/tech/check/email";
 
             //Основной путь  
-            string URL = GlobalMethod.GetAppSetting().ApiUrlUL + urlParametrs;
+            string URL = baseUrl + urlParametrs;
             //Создаем экземпляр класса для отправки запросов к веб-ресурсам
             HttpClient client = new HttpClient();
             //Задаем базовый путь до веб-ресурса
@@ -111,13 +111,13 @@ namespace TestApiIesbk.Controller
 
 
         //Отправка тестового sms на телефон
-        public static void SendTestSms(string tokenTech, string phone)
+        public static void SendTestSms(string baseUrl, string tokenTech, string phone)
         {
             //Параметры запроса(метод апи)
             string urlParametrs = "service/tech/check/sms";
 
             //Основной путь  
-            string URL = GlobalMethod.GetAppSetting().ApiUrlUL + urlParametrs;
+            string URL = baseUrl + urlParametrs;
             //Создаем экземпляр класса для отправки запросов к веб-ресурсам
             HttpClient client = new HttpClient();
             //Задаем базовый путь до веб-ресурса

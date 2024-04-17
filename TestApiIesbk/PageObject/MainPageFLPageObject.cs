@@ -6,7 +6,6 @@ namespace TestApiIesbk.PageObject
     public class MainPageFLPageObject
     {
         private IWebDriver _webDriver;
-        public static string LocatMainPageFL = GlobalMethod.GetAppSetting().SiteURLFL; //путь до главной страницы сайта физ. лица
         private readonly By _buttonPersonalAccount = By.XPath("//button[@id='idModalLoginWindow']"); //путь до кнопки личный кабинет на главной странице
         private readonly By _radioButtonFL = By.XPath("//label[text()='Частным лицам']"); //путь до радиобаттона частным лицам
         private readonly By _buttonBackChoiceFL = By.XPath("//div[@class='AuthScreenChooseUserTypeTemplate']/button[text()='Далее']"); //путь до кнопки далее при выборе(ФЛ/ЮЛ)

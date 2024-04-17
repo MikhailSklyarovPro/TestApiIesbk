@@ -5,8 +5,11 @@ namespace TestApiIesbk.Model.FL
 {
     public class TestDataFL
     {
-        [JsonPropertyName("url")]
-        public string url { get; set; }
+        [JsonPropertyName("urlApi")]
+        public string urlApi { get; set; }
+
+        [JsonPropertyName("urlSite")]
+        public string urlSite { get; set; }
 
         [JsonPropertyName("type")]
         public string type { get; set; }
