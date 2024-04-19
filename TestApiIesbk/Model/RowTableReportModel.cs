@@ -3,7 +3,6 @@ namespace TestApiIesbk.Model
 {
     public class RowTableReportModel
     {
-        public bool needCheckbox { get; set; }
         public string nameCompany { get; set; }
         public string testData { get;set; }
         public string numberTest { get; set; }

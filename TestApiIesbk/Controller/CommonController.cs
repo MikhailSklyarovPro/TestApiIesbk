@@ -106,6 +106,7 @@ namespace TestApiIesbk.Controller
                 //Выводим ошибку от сервера
                 Assert.Fail($"Действие: Отправка тестового письма на email: {email}. Результат: Не удалось отправить письмо! Код ошибки: {errorModel.code}, текст ошибки: {errorModel.message}");
             }
+           
             client.Dispose();
         }
 

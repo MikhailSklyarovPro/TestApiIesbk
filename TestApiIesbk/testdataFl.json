@@ -3,6 +3,21 @@
     "urlApi": "https://api-lkpl-iesbk.dev.enplus.digital/api/",
     "urlSite": "https://sbyt-irkutskenergo.dev.enplus.digital/",
     "type": "fl",
+    "needManualCheck": "true",
+    "tech_login": "Misha",
+    "tech_password": "111111111",
+    "testsettings": {
+      "login": "10103005224",
+      "password": "111111111",
+      "authenticator": "Бухарова",
+      "balance": "12663,44",
+      "device_id": "60909dbb-57c5-11e7-80d4-002481f90c3a"
+    }
+  },
+  {
+    "urlApi": "https://api-lkpl-volga.dev.enplus.digital/api/",
+    "urlSite": "https://sbyt-irkutskenergo.dev.enplus.digital/",
+    "type": "fl",
     "tech_login": "Misha",
     "tech_password": "111111111",
     "testsettings": {

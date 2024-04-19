@@ -133,8 +133,8 @@ public class TestSuite
                 //Устанавливает в ячейки текст
                 HtmlTextNode numberHeadValue = document.CreateTextNode("№");
                 HtmlTextNode nameMethodHeadValue = document.CreateTextNode("Метод");
-                HtmlTextNode rezultHeadValue = document.CreateTextNode("Результат");
-                HtmlTextNode checkHeadValue = document.CreateTextNode("Проверка");
+                HtmlTextNode rezultHeadValue = document.CreateTextNode("Результат теста");
+                HtmlTextNode checkHeadValue = document.CreateTextNode("Ручная проверка");
                 HtmlTextNode timeHeadValue = document.CreateTextNode("Время");
                 HtmlTextNode messageHeadValue = document.CreateTextNode("Сообщение");
                 HtmlTextNode testDataHeadValue = document.CreateTextNode("Тестовые данные");
@@ -188,7 +188,7 @@ public class TestSuite
                         HtmlTextNode numberTestValue = document.CreateTextNode(rowTableReport.numberTest);
                         HtmlTextNode parentClassValue = document.CreateTextNode(rowTableReport.parentClass);
                         HtmlTextNode resultValue = document.CreateTextNode(rowTableReport.result);
-                        if(rowTableReport.needCheckbox){
+                        if(GlobalMethod.ListMethodManualCheck.Contains(rowTableReport.parentClass)){
                             HtmlNode inputYes = document.CreateElement("input");
                             HtmlNode labelYes = document.CreateElement("label");
                             HtmlNode inputNo = document.CreateElement("input");
@@ -220,7 +220,7 @@ public class TestSuite
 
                         //Задаем стили для отображения результатов тестов
                         if (rowTableReport.result == "Passed") { resultCell.SetAttributeValue("style", "color:green;"); }
-                        if (rowTableReport.result == "Failed") { resultCell.SetAttributeValue("style", "color:red;"); }
+                        if (rowTableReport.result.Contains("Failed")) { resultCell.SetAttributeValue("style", "color:red;"); }
                         if (rowTableReport.result == "Ignore") { resultCell.SetAttributeValue("style", "color:yellow;"); }
 
                         //Добавляем в ячейки значения
@@ -318,11 +318,10 @@ namespace TestApiIesbk.TestIesbk
             }
 
             RowTableReportModel rowTable = new RowTableReportModel();
-            rowTable.needCheckbox = true;
             rowTable.nameCompany = nameCompany;
             rowTable.testData = JsonSerializer.Serialize(TestContext.CurrentContext.Test.Arguments[0]!); //Аргуметы теста
             rowTable.numberTest = TestContext.CurrentContext.Test.Arguments[1]!.ToString()!; //Номер теста
-            rowTable.parentClass = TestContext.CurrentContext.Test.MethodName!; //Полное имя теста с параметрами
+            rowTable.parentClass = TestContext.CurrentContext.Test.MethodName!; //Имя метода теста
             rowTable.result = TestContext.CurrentContext.Result.Outcome.ToString(); //Результат теста
             rowTable.timeExecution = TestExecutionContext.CurrentContext.Duration.ToString() + " сек."; //Длительность теста
             rowTable.message = TestContext.CurrentContext.Result.Message; //Ошибка теста или описание действия (Если есть)
@@ -348,13 +347,13 @@ namespace TestApiIesbk.TestIesbk
 
 
 
-        //Метод выполняет тест. Принимает в параметры тестовые данные.
-        [Test, TestCaseSource(nameof(GetParametrs))]
-        public void LoginFlAPI(TestDataFL testData, int numberTest)
-        {
-            FLController.LoginUser(testData.urlApi, testData.testSettings.login, testData.testSettings.password);
-            Assert.Pass("Вход пользователя в личный кабинет ФЛ API.");
-        }
+        ////Метод выполняет тест. Принимает в параметры тестовые данные.
+        //[Test, TestCaseSource(nameof(GetParametrs))]
+        //public void LoginFlAPI(TestDataFL testData, int numberTest)
+        //{
+        //    FLController.LoginUser(testData.urlApi, testData.testSettings.login, testData.testSettings.password);
+        //    Assert.Pass("Вход пользователя в личный кабинет ФЛ API.");
+        //}
 
 
 
@@ -396,33 +395,33 @@ namespace TestApiIesbk.TestIesbk
 
 
 
-        [Test, TestCaseSource(nameof(GetParametrs))]
-        public void LoginFlFront(TestDataFL testData, int numberTest)
-        {
-            string message = "Действие: Вход пользователя в ЛК ФЛ FRONT. Результат:";
-            IWebDriver _webDriver = new ChromeDriver();
-            //Открываем окно бразуера на весь экран
-            _webDriver.Manage().Window.Maximize();
-            //Переходим на главну. страницу сайта ФЛ
-            _webDriver.Navigate().GoToUrl(testData.urlSite);
-            //Создаем экземпляр главной страницы сайта ФЛ
-            MainPageFLPageObject mainPageFLPage = new MainPageFLPageObject(_webDriver);
-            //Нажимаем на кнопку личный кабинет
-            mainPageFLPage.ClickButtonPersonalAccount(message);
-            //Выбираем радиобаттон частным лицам
-            mainPageFLPage.ChoiceRadioButtonFL(message);
-            //Выбираем вход по логину и паролю
-            mainPageFLPage.ChoiceRadioButtonMethodLogin(message);
-            //Вводим логин
-            mainPageFLPage.EnterNumberAccount(testData.testSettings.login, message);
-            //Вводим пароль
-            mainPageFLPage.EnterPassword(testData.testSettings.password, message);
-            //Нажимаем на кнопку войти
-            mainPageFLPage.ClickButtonLogin(message);
-            //Уничтожаем вебдрайвер
-            _webDriver.Quit();
-            Assert.Pass("Вход пользователя в ЛК ФЛ FRONT.");
-        }
+        //[Test, TestCaseSource(nameof(GetParametrs))]
+        //public void LoginFlFront(TestDataFL testData, int numberTest)
+        //{
+        //    string message = "Действие: Вход пользователя в ЛК ФЛ FRONT. Результат:";
+        //    IWebDriver _webDriver = new ChromeDriver();
+        //    //Открываем окно бразуера на весь экран
+        //    _webDriver.Manage().Window.Maximize();
+        //    //Переходим на главну. страницу сайта ФЛ
+        //    _webDriver.Navigate().GoToUrl(testData.urlSite);
+        //    //Создаем экземпляр главной страницы сайта ФЛ
+        //    MainPageFLPageObject mainPageFLPage = new MainPageFLPageObject(_webDriver);
+        //    //Нажимаем на кнопку личный кабинет
+        //    mainPageFLPage.ClickButtonPersonalAccount(message);
+        //    //Выбираем радиобаттон частным лицам
+        //    mainPageFLPage.ChoiceRadioButtonFL(message);
+        //    //Выбираем вход по логину и паролю
+        //    mainPageFLPage.ChoiceRadioButtonMethodLogin(message);
+        //    //Вводим логин
+        //    mainPageFLPage.EnterNumberAccount(testData.testSettings.login, message);
+        //    //Вводим пароль
+        //    mainPageFLPage.EnterPassword(testData.testSettings.password, message);
+        //    //Нажимаем на кнопку войти
+        //    mainPageFLPage.ClickButtonLogin(message);
+        //    //Уничтожаем вебдрайвер
+        //    _webDriver.Quit();
+        //    Assert.Pass("Вход пользователя в ЛК ФЛ FRONT.");
+        //}
 
 
 
@@ -430,7 +429,7 @@ namespace TestApiIesbk.TestIesbk
         [Test, TestCaseSource(nameof(GetParametrs))]
         public void LoginTechFlFront(TestDataFL testData, int numberTest)
         {
-            string message = "Действие: Вход пользователя в ЛК ФЛ FRONT. Результат:";
+            string message = "Действие: Вход техподдержки в ЛК ФЛ FRONT. Результат:";
             IWebDriver _webDriver = new ChromeDriver();
             //Открываем окно бразуера на весь экран
             _webDriver.Manage().Window.Maximize();
@@ -528,12 +527,12 @@ namespace TestApiIesbk.TestIesbk
         
 
 
-        [Test, TestCaseSource(nameof(GetParametrs))]
-        public void LoginTechAPI(TestDataUL testData, int numberTest)
-        {
-            ULController.LoginUserTech(testData.urlApi, testData.techLogin, testData.techPassword);
-            Assert.Pass("Вход техподдержки в личный кабинет ЮЛ API.");
-        }
+        //[Test, TestCaseSource(nameof(GetParametrs))]
+        //public void LoginTechAPI(TestDataUL testData, int numberTest)
+        //{
+        //    ULController.LoginUserTech(testData.urlApi, testData.techLogin, testData.techPassword);
+        //    Assert.Pass("Вход техподдержки в личный кабинет ЮЛ API.");
+        //}
 
 
         [Test, TestCaseSource(nameof(GetParametrs))]

@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\SklyarovMD\\Source\\Repos\\TestApiIesbk\\TestApiIesbk\\TestApiIesbk.csproj": {}
+    "C:\\Users\\SklyarovMD\\source\\repos\\TestApiIesbk\\TestApiIesbk\\TestApiIesbk.csproj": {}
   },
   "projects": {
-    "C:\\Users\\SklyarovMD\\Source\\Repos\\TestApiIesbk\\TestApiIesbk\\TestApiIesbk.csproj": {
+    "C:\\Users\\SklyarovMD\\source\\repos\\TestApiIesbk\\TestApiIesbk\\TestApiIesbk.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\SklyarovMD\\Source\\Repos\\TestApiIesbk\\TestApiIesbk\\TestApiIesbk.csproj",
+        "projectUniqueName": "C:\\Users\\SklyarovMD\\source\\repos\\TestApiIesbk\\TestApiIesbk\\TestApiIesbk.csproj",
         "projectName": "TestApiIesbk",
-        "projectPath": "C:\\Users\\SklyarovMD\\Source\\Repos\\TestApiIesbk\\TestApiIesbk\\TestApiIesbk.csproj",
+        "projectPath": "C:\\Users\\SklyarovMD\\source\\repos\\TestApiIesbk\\TestApiIesbk\\TestApiIesbk.csproj",
         "packagesPath": "C:\\Users\\SklyarovMD\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\SklyarovMD\\Source\\Repos\\TestApiIesbk\\TestApiIesbk\\obj\\",
         "projectStyle": "PackageReference",

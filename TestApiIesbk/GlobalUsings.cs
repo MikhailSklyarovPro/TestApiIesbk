@@ -9,6 +9,12 @@ namespace TestApiIesbk {
         //Номер выполняемого теста
         public static int numberTest = 0;
 
+        //Список методов подлежащих ручной проверке результата тестирования
+        public static string[] ListMethodManualCheck = {
+            "CheckSendTestSmsAPI",
+            "CheckSendTestLetterAPI"
+        };
+
         //Сохраняет результаты выполнения всех тестов
         public static List<RowTableReportModel> ListRowTableReport = new List<RowTableReportModel>();
 

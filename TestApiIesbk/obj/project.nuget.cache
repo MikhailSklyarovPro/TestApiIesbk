@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wQgc2RgjwLaDXCEmful+57h9ce3iB6ITEgrff+gExp/vf2vNAjTIym4LcvIs4rXFag4rdstKutud9ZOSCYeF7A==",
+  "dgSpecHash": "ehUqJQQrXvkAbfUcnEnERkcY5pqiM5eQl7vcOAOzEqLRxvUz5B2JoyWJ9GFDTV5dl2U5JGWBdOcX5WBcXyqP4Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\SklyarovMD\\Source\\Repos\\TestApiIesbk\\TestApiIesbk\\TestApiIesbk.csproj",
+  "projectFilePath": "C:\\Users\\SklyarovMD\\source\\repos\\TestApiIesbk\\TestApiIesbk\\TestApiIesbk.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\SklyarovMD\\.nuget\\packages\\aspose.html\\24.3.0\\aspose.html.24.3.0.nupkg.sha512",
     "C:\\Users\\SklyarovMD\\.nuget\\packages\\bouncycastle.cryptography\\2.3.0\\bouncycastle.cryptography.2.3.0.nupkg.sha512",
